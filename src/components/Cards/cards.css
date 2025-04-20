@@ -1,0 +1,88 @@
+/* Card wrapper */
+.feature-card {
+    width: 100%;
+    max-width: 430px;
+    height: auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* More visible */
+    padding: 24px;
+    text-align: left; /* Align text to left */
+    margin-bottom: 20px;
+    overflow: hidden;
+    word-wrap: break-word;
+    transition: transform 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px); /* Slight lift on hover */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Stronger hover shadow */
+}
+
+/* Card grid styles */
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: flex-start; /* Align to left */
+}
+
+/* Getting Started card */
+.getting-started-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.getting-started-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+.card-icon {
+    background-color: #eef2ff;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.card-content {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.card-content h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #111827;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.4;
+}
+
+.arrow-icon {
+    color: #6b7280;
+    transition: transform 0.2s;
+    margin-left: auto;
+}
+
+.getting-started-card:hover .arrow-icon {
+    transform: translateX(4px);
+}

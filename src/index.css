@@ -1,0 +1,47 @@
+/* global.css */
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Universal Font Application */
+* {
+    font-family: 'Lexend Deca', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lexend Deca', sans-serif;
+    color: #3f3d3d;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 700;
+    color: #353232;
+    margin: 0;
+}
+
+/* Heading font sizes */
+h1 { font-size: 32px; }
+h2 { font-size: 28px; }
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+
+/* Lucid Icons */
+.lucid-icon {
+    color: #5664f5;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 1rem;
+}
+
+.lucid-icon-small { width: 20px; height: 20px; }
+.lucid-icon-large { width: 36px; height: 36px; }
