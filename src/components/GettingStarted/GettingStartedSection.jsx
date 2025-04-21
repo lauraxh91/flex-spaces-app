@@ -22,7 +22,7 @@ const steps = [
 const GettingStartedSection = () => {
   return (
     <section className="getting-started-section">
-      <h2 className="getting-started-title">Getting Started is Easy</h2>
+      <h2 className="getting-started-title">How It Works</h2>
       <div className="getting-started-steps">
         {steps.map(({ icon: Icon, title, description }, index) => (
           <div className="getting-started-step" key={index}>

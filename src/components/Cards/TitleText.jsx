@@ -5,9 +5,9 @@ const TitleText = ({ text }) => {
   const style = {
     color: '#030303',
     fontSize: '18px',
+    fontFamily: 'Lexend Deca',
     fontWeight: 700,
     lineHeight: '28px',
-    marginBottom: '8px',
   };
 
   return <div style={style}>{text}</div>;

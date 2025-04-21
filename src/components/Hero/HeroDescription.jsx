@@ -4,9 +4,10 @@ const styles = {
   Text: {
     color: '#030303',
     fontSize: '18px',
+    fontFamily: 'Lexend Deca',
+    fontWeight: 300,
     lineHeight: '28px',
     textAlign: 'center',
-    marginBottom: '12px',
   },
 };
 

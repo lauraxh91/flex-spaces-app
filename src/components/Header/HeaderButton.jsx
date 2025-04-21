@@ -16,7 +16,14 @@ const styles = {
 };
 
 const HeaderButton = ({ label = 'Join Us' }) => (
-  <button style={styles.Button}>{label}</button>
+  <a
+    href="https://docs.google.com/forms/d/e/1FAIpQLSeevC311H6lS24PziUaooPr7adTQfi97DQi54hOGf1iDhN-GQ/viewform?usp=header"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ textDecoration: 'none' }}
+  >
+    <button style={styles.Button}>{label}</button>
+  </a>
 );
 
 export default HeaderButton;

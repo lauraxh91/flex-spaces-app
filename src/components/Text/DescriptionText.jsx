@@ -2,13 +2,11 @@ import React from 'react';
 
 const styles = {
   Text: {
-    color: '#030303',
-    fontSize: '18px',
-    maxWidth: '900px',
+   color: '#030303',
+    fontSize: '16px',
+    fontFamily: 'Lexend Deca',
     fontWeight: 300,
-    lineHeight: '28px',
-    textAlign: 'center',  // Ensures text is centered
-    margin: '0 auto',  // Centers the element itself within its container (if needed)
+    lineHeight: '24px',
   },
 };
 
