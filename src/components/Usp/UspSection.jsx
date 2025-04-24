@@ -6,17 +6,17 @@ const UspSection = () => {
     {
       icon: ChartArea,
       title: 'Increase Revenue',
-      body: 'Attract new clients effortlessly. Set your pricing and connect with a growing pool of remote professionals.',
+      body: 'Attract new clients effortlessly. Set your own pricing and tap into a growing community of remote workers and digital nomads looking for flexible workspaces.',
     },
     {
       icon: Calendar,
       title: 'Flexible Booking',
-      body: 'Accept bookings only when you have space. Control your availability, hours, and capacity.',
+      body: 'Only accept bookings when it suits you. Set your own hours, manage availability, and maintain full control over your space.',
     },
     {
       icon: Briefcase,
       title: 'Smart Workspace Management',
-      body: 'Easily manage your space and optimize occupancy with smart features tailored to your needs.',
+      body: 'Streamline operations with intuitive tools built for coworking spaces. Easily manage bookings, track performance, and optimize occupancy—without the hassle.',
     },
   ];
 

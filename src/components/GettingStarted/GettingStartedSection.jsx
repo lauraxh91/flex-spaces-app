@@ -5,17 +5,17 @@ const steps = [
   {
     icon: ListIcon,
     title: 'List Your Space Quickly',
-    description: 'Share details about your space, availability, and amenities.',
+    description: 'Tell us about your space—add photos, availability, and key amenities. We’ll help you get set up.',
   },
   {
     icon: DollarSignIcon,
     title: 'Receive Flexible Bookings',
-    description: 'Remote workers browse and book your space based on real-time availability.',
+    description: 'Remote workers discover your space through our platform and book based on your real-time availability.',
   },
   {
     icon: CheckCircle,
     title: 'Earn Effortlessly',
-    description: 'We handle payments, check-ins, and support while you focus on delivering a great experience.',
+    description: 'We take care of payments, check-ins, and customer support. You focus on creating an amazing workspace experience.',
   },
 ];
 

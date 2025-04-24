@@ -11,7 +11,7 @@ const styles = {
   },
 };
 
-const HeroDescription = ({ text = 'List your coworking space on our flexible booking platform. Connect with digital nomads, freelancers, and remote workers seeking dynamic schedules.' }) => (
+const HeroDescription = ({ text = 'Join our upcoming platform to attract more clients and streamline your bookings.' }) => (
   <div style={styles.Text}>{text}</div>
 );
 
