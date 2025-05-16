@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-const MONGODB_URI = 'mongodb+srv://laurax:xNJhtqCETbTl0i7Z@cluster0.e0y97o4.mongodb.net/contact-form?retryWrites=true&w=majority&appName=Cluster0';
-
+const MONGODB_URI = process.env.MONGODB_URI;
 const formSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -20,7 +19,7 @@ async function connectDB() {
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   if (req.method === 'POST') {
     try {
       await connectDB();
@@ -35,4 +34,4 @@ export default async function handler(req, res) {
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
-}
+};

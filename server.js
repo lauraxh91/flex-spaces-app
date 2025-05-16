@@ -1,48 +1,36 @@
 import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-// MongoDB Connection
-mongoose.connect('mongodb+srv://laurax:xNJhtqCETbTl0i7Z@cluster0.e0y97o4.mongodb.net/contact-form?retryWrites=true&w=majority&appName=Cluster0', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log('✅ Connected to MongoDB'))
-  .catch((err) => console.error('❌ MongoDB Connection Error:', err));
+dotenv.config();
 
-// Define schema + model
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+mongoose.connect(MONGODB_URI).then(() => console.log('Connected to MongoDB')).catch(err => console.error(err));
+
 const formSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
   comment: String,
-  createdAt: { type: Date, default: Date.now },
 });
 
 const Form = mongoose.model('Form', formSchema);
 
-// Init app
-const app = express();
-const port = 5000;
-
-app.use(cors());
-app.use(bodyParser.json());
-
-// Handle form submissions
 app.post('/submit', async (req, res) => {
-  const { name, email, phone, comment } = req.body;
   try {
-    const newForm = new Form({ name, email, phone, comment });
+    const newForm = new Form(req.body);
     await newForm.save();
-    res.status(200).json({ message: 'Form submitted successfully!' });
+    res.status(200).json({ message: 'Form submitted!' });
   } catch (err) {
-    console.error('Error saving form:', err);
-    res.status(500).json({ message: 'Server error. Please try again later.' });
+    console.error(err);
+    res.status(500).json({ message: 'Error saving form data' });
   }
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`🚀 Server is running on http://localhost:${port}`);
-});
+app.listen(3000, () => console.log('Server running on port 3000'));
