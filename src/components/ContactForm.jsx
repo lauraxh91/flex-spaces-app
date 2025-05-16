@@ -71,16 +71,15 @@ const ContactForm = () => {
         <div style={styles.success}>Thank you! We'll be in touch soon. 🙌</div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <label style={styles.label}>Name</label>
-          <input style={styles.input} name="name" value={form.name} onChange={handleChange} required />
-
+         
           <label style={styles.label}>Email</label>
           <input style={styles.input} name="email" type="email" value={form.email} onChange={handleChange} required />
-
-          <label style={styles.label}>Phone</label>
+          <label style={styles.label}>Name (optional)</label>
+          <input style={styles.input} name="name" value={form.name} onChange={handleChange}/>
+          <label style={styles.label}>Phone (optional)</label>
           <input style={styles.input} name="phone" value={form.phone} onChange={handleChange} />
 
-          <label style={styles.label}>Comment</label>
+          <label style={styles.label}>Comment (optional)</label>
           <textarea style={styles.textarea} name="comment" value={form.comment} onChange={handleChange} />
 
           <button type="submit" style={styles.button}>Submit</button>

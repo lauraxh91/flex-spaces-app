@@ -12,7 +12,7 @@ const styles = {
 };
 
 const defaultProps = {
-  text: 'Coworking Spaces are Booming — Are You Missing Out?',
+  text: 'More People Work Remotely Than Ever — Attract Them to Your Space',
 };
 
 const TitleText = (props) => {
