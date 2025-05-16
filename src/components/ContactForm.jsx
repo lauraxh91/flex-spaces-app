@@ -57,7 +57,7 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/submit', form);
+      const response = await axios.post('https://flex-spaces-app.onrender.com/submit', form);
       setSubmitted(true); // Show the success message
     } catch (err) {
       console.error('Error submitting form:', err);
