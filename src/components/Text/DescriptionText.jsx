@@ -2,16 +2,17 @@ import React from 'react';
 
 const styles = {
   Text: {
-   color: '#030303',
-    fontSize: '16px',
+    color: '#030303',
+    fontSize: '18px',
     fontFamily: 'Lexend Deca',
     fontWeight: 300,
-    lineHeight: '24px',
+    lineHeight: '28px',
+    textAlign: 'center',
   },
 };
 
 const defaultProps = {
-  text: 'Remote workers crave flexibility. They desire the freedom to choose where and how long they work. Tap into this trend and make your space their next hub for inspiration and productivity.',
+  text: 'Remote professionals are working differently. They seek freedom, not long-term contracts, but day passes, week passes, and drop-ins. By listing your space on our platform, you can fill unused desks and bring in additional revenue from ad-hoc users, without disrupting your existing members. Be among the first featured spaces when we launch.',
 };
 
 const DescriptionText = (props) => {

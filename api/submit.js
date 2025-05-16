@@ -1,69 +1,36 @@
+import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://laurax:xNJhtqCETbTl0i7Z@cluster0.e0y97o4.mongodb.net/contact-form?retryWrites=true&w=majority&appName=Cluster0';
+dotenv.config();
 
-if (!MONGODB_URI) {
-  throw new Error('❌ MONGODB_URI is not defined in environment variables');
-}
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-// Global cache to prevent repeated connections in serverless
-let cached = global.mongoose;
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+const MONGODB_URI = process.env.MONGODB_URI;
 
-async function connectToDatabase() {
-  if (cached.conn) return cached.conn;
+mongoose.connect(MONGODB_URI).then(() => console.log('Connected to MongoDB')).catch(err => console.error(err));
 
-  if (!cached.promise) {
-    console.log('🔌 Connecting to MongoDB...');
-    cached.promise = mongoose.connect(MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000, // Fail quickly if DB is unreachable
-    }).then((mongoose) => {
-      console.log('✅ MongoDB connected');
-      return mongoose;
-    });
-  }
-
-  cached.conn = await cached.promise;
-  return cached.conn;
-}
-
-// Define schema once
 const formSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
   comment: String,
-  createdAt: { type: Date, default: Date.now },
 });
 
-// Prevent OverwriteModelError
-const Form = mongoose.models.Form || mongoose.model('Form', formSchema);
+const Form = mongoose.model('Form', formSchema);
 
-// API handler
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
-  }
-
-  const { name, email, phone, comment } = req.body;
-
-  if (!name || !email || !comment) {
-    return res.status(400).json({ message: 'Missing required fields' });
-  }
-
+app.post('/submit', async (req, res) => {
   try {
-    await connectToDatabase();
-
-    const newForm = new Form({ name, email, phone, comment });
+    const newForm = new Form(req.body);
     await newForm.save();
-
-    console.log('✅ Form data saved:', { name, email });
-
-    return res.status(200).json({ message: 'Form submitted successfully!' });
-  } catch (error) {
-    console.error('❌ Submission error:', error);
-    return res.status(500).json({ message: 'Internal Server Error' });
+    res.status(200).json({ message: 'Form submitted!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error saving form data' });
   }
-}
+});
+
+app.listen(3000, () => console.log('Server running on port 3000'));

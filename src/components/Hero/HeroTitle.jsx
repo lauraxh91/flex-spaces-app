@@ -11,7 +11,7 @@ const styles = {
   },
 };
 
-const HeroTitle = ({ text = 'Expand Your Reach: List Your Coworking Space on Flex Spaces' }) => (
+const HeroTitle = ({ text = 'Reach More Remote Workers. Boost Your Daily Revenue.' }) => (
   <div style={styles.Text}>{text}</div>
 );
 
