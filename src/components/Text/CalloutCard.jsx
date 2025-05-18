@@ -6,7 +6,7 @@ const styles = {
     maxWidth: '1672px',
     margin: '0 auto',
     padding: '40px 20px',
-    backgroundColor: '#5664f5',
+    backgroundColor: '#6c78ed',
     textAlign: 'center',
     color: '#ffffff',
     fontFamily: 'Lexend Deca',

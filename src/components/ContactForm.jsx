@@ -7,7 +7,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'left',
     minHeight: '100vh', // Full height of viewport
-    backgroundColor: '#5664f5', // Optional: light background
+    backgroundColor: '#6c78ed', // Optional: light background
   },
   container: {
     maxWidth: '600px',
