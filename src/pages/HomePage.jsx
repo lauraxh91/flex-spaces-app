@@ -16,7 +16,7 @@ import  '../components/Cards/cards.css';
 import  '../components/GettingStarted/getting-started.css';
 import ContactForm from '../components/ContactForm'; 
 import Footer from '../components/Footer'; 
-import CallOutCard from '../components/Text/CallOutCard';
+import CallOut from '../components/Text/CallOut';
 
 const HomePage = () => {
     return (
@@ -34,7 +34,7 @@ const HomePage = () => {
             </section>
         </div>
         <div style={{ paddingTop: '1px' }}>
-            <CallOutCard/>
+            <CallOut/>
         </div>
         <div style={{ paddingTop: '1px' }}>
             <section id="how-it-works">
