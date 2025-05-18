@@ -10,8 +10,13 @@ app.use(cors());
 app.use(express.json());
 
 const MONGODB_URI = process.env.MONGODB_URI;
-
-mongoose.connect(MONGODB_URI).then(() => console.log('Connected to MongoDB')).catch(err => console.error(err));
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 20000, // wait 20s before error
+})
+.then(() => console.log('✅ Connected to MongoDB'))
+.catch(err => console.error('❌ MongoDB connection error:', err));
 
 const formSchema = new mongoose.Schema({
   name: String,
