@@ -48,8 +48,8 @@ const styles = {
     fontFamily: 'inherit',
   },
   button: {
-    backgroundColor: '#white',
-    color: 'black',
+    backgroundColor: 'black',
+    color: 'white',
     border: 'none',
     padding: '12px 20px',
     fontSize: '16px',

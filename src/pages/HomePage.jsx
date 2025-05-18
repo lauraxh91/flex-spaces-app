@@ -41,7 +41,7 @@ const HomePage = () => {
                 <GettingStartedSection />
             </section>
         </div>
-        <div style={{ paddingTop: '30px' }}>
+        <div style={{ paddingTop: '20px' }}>
         <section style={{  textAlign: 'center',lineHeight: '28px',fontWeight: 700,    fontSize: '18px',color: '#030303'}} id="contact">
             <ContactForm />
             <Footer />

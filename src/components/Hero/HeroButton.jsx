@@ -24,16 +24,11 @@ const styles = {
 };
 
 const HeroButton = ({ label = '👉 I\'m Interested' }) => {
-  const navigate = useNavigate();
-
   return (
     <div style={styles.ButtonWrapper}>
-      <button
-        style={styles.Button}
-        onClick={() => navigate('/contact-form')}
-      >
+      <a href="#contact" style={{ ...styles.Button, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>
         {label}
-      </button>
+      </a>
     </div>
   );
 };
