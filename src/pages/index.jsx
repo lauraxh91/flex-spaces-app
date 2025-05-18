@@ -14,7 +14,6 @@ function App() {
     <Router>
     <Routes>
         <Route path="/" element={<HomePage />} />  {/* Add the /test route */}
-        <Route path="/contact-form" element={<ContactPage />} />
     </Routes>
     </Router>
   );

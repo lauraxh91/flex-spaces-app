@@ -1,4 +1,7 @@
 import HeroImage from '../components/Hero/HeroImage';
+import HeaderButton from '../components/Header/HeaderButton';
+import HeaderIcon from '../components/Header/HeaderIcon';
+import HeaderText from '../components/Header/HeaderText';
 import HeroCard from '../components/Hero/HeroCard';
 import HeroTitle from '../components/Hero/HeroTitle';
 import HeroDescription from '../components/Hero/HeroDescription';
@@ -11,31 +14,39 @@ import GettingStartedSection from "../components/GettingStarted/GettingStartedSe
 
 import  '../components/Cards/cards.css';
 import  '../components/GettingStarted/getting-started.css';
-import TitleText from '../components/Text/TitleText';
-import DescriptionText from '../components/Text/DescriptionText';
+import ContactForm from '../components/ContactForm'; 
+import Footer from '../components/Footer'; 
+import CalloutCard from '../components/Text/CallOutCard';
 
 const HomePage = () => {
     return (
         <div className="page-container">
+            <HeaderText />
             <HeroImage />
             <HeroCard>
             <HeroTitle />
             <HeroDescription />
             <HeroButton />
             </HeroCard>
-        <div style={{ padding: '40px' }}>
-            <UspSection />
+        <div style={{ paddingTop: '1px' }}>
+            <section id="benefits">
+                <UspSection />
+            </section>
         </div>
-        <div style={{ padding: '40px' }}>
-            <GettingStartedSection />
+        <div style={{ paddingTop: '1px' }}>
+            <CalloutCard/>
         </div>
-        <div style={{ padding: '40px' }}>
-            <TitleText/>
-            <DescriptionText/>
-            <HeroButton />   
+        <div style={{ paddingTop: '1px' }}>
+            <section id="how-it-works">
+                <GettingStartedSection />
+            </section>
         </div>
-
-       
+        <div style={{ paddingTop: '20px' }}>
+        <section style={{  textAlign: 'center',lineHeight: '28px',fontWeight: 700,    fontSize: '18px',color: '#030303'}} id="contact">
+            <ContactForm />
+            <Footer />
+        </section>
+        </div>
     </div>
     );
 };
