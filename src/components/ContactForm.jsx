@@ -6,7 +6,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'left',
-    minHeight: '100vh', // Full height of viewport
+
     backgroundColor: '#6c78ed', // Optional: light background
   },
   container: {
