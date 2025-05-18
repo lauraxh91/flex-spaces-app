@@ -1,24 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const styles = {
-  Card: {
-    position: 'absolute',
-    top: '281px',
-    left: '50%',
-    transform: 'translateX(-50%)', // This centers the card horizontally
-    width: '90%',
-    maxWidth: '1376px', // Maximum width
-    height: 'auto',
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    borderRadius: '8px',
-    padding: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const getCardStyle = (isMobile) => ({
+  position: 'absolute',
+  top: isMobile ? '90px' : '281px',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  width: '90%',
+  maxWidth: '1376px',
+  height: 'auto',
+  backgroundColor: 'rgba(255,255,255,0.75)',
+  borderRadius: '8px',
+  padding: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+const HeroCard = ({ children }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // check once on mount
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return <div style={getCardStyle(isMobile)}>{children}</div>;
 };
-
-const HeroCard = ({ children }) => <div style={styles.Card}>{children}</div>;
 
 export default HeroCard;
