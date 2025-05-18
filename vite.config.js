@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', // ✅ ensures correct relative paths in build
+  base: './', // ✅ ensures correct relative paths in build
   server: {
     proxy: {
       '/api': {
