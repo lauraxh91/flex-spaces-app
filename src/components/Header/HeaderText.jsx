@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react'; // Or use emojis: ☰ and ✖
 
-const HeaderText = ({ text = 'FlexSpaces' }) => {
+const HeaderText = ({ text = 'BookSpace' }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [menuOpen, setMenuOpen] = useState(false);
 

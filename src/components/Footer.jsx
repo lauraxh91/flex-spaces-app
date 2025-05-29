@@ -10,7 +10,7 @@ const footerStyle = {
 const Footer = () => {
   return (
     <footer style={footerStyle}>
-      © {new Date().getFullYear()} Flex Spaces. All rights reserved.
+      © {new Date().getFullYear()} BookSpace. All rights reserved.
     </footer>
   );
 };
