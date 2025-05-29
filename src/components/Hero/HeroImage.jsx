@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultImage from '../../assets/background-image5.jpg'; // adjust path based on your folder structure
+import defaultImage from '../../assets/1.jpg'; // adjust path based on your folder structure
 
 const styles = {
   imageContainer: {

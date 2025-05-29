@@ -7,7 +7,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'left',
 
-    backgroundColor: '#6c78ed', // Optional: light background
+    backgroundColor: '#202223', // Optional: light background
   },
   container: {
     maxWidth: '600px',

@@ -11,7 +11,7 @@ const styles = {
   },
 };
 
-const HeroDescription = ({ text = 'List your coworking space on our flexible booking platform and connect with remote professionals, digital nomads, and freelancers looking for short-term work spots. You choose when to accept bookings, how many desks to offer, and what pricing works best for you.' }) => (
+const HeroDescription = ({ text = 'Connect with a stream of remote professionals seeking flexible workspaces. You control the terms, pricing, and availability.' }) => (
   <div style={styles.Text}>{text}</div>
 );
 
