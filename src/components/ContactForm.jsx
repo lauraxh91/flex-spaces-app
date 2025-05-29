@@ -1,73 +1,123 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import defaultImage from '../assets/3.webp';
 
 const styles = {
-  outerWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'left',
-
-    backgroundColor: '#202223', // Optional: light background
-  },
-  container: {
-    maxWidth: '600px',
+  wrapper: {
     width: '100%',
-    padding: '20px',
-    fontFamily: 'sans-serif',
+    margin: '0 auto',
+    padding: '60px 20px',
+    backgroundColor: '#202223',
+    color: '#ffffff',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: '40px',
+    alignItems: 'stretch',
+    justifyContent: 'center',
   },
-  label: {
-    color: '#030303',
-    fontSize: '16px',
-    fontWeight: 700,
-    marginTop: '12px',
-    display: 'block',
-    textAlign: 'left',
+  card: {
+    flex: '1 1 48%',
+    minWidth: '320px',
+    maxWidth: '600px',
+    backgroundColor: '#2C2E2F',
+    borderRadius: '16px',
+    padding: '32px',
+    boxShadow: '0 0 20px rgba(0,0,0,0.3)',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  imageWrapper: {
+    flex: '1 1 48%',
+    minWidth: '320px',
+    maxWidth: '600px',
+    height: '100%',
+    borderRadius: '16px',
+    overflow: 'hidden',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '16px',
   },
   input: {
     width: '100%',
-    height: '42px',
-    padding: '0 12px',
-    marginBottom: '15px',
+    height: '44px',
+    padding: '10px 14px',
+    borderRadius: '10px',
     border: '1px solid #cccccc',
-    borderRadius: '8px',
     backgroundColor: '#ffffff',
     color: '#030303',
     fontSize: '16px',
-    fontWeight: 400,
-    boxSizing: 'border-box',
-    outline: 'none',
+    marginBottom: '16px',
   },
   textarea: {
     width: '100%',
     height: '80px',
-    padding: '10px',
-    marginBottom: '15px',
-    borderRadius: '8px',
-    border: '1px solid #ccc',
+    padding: '10px 14px',
+    borderRadius: '10px',
+    border: '1px solid #cccccc',
+    backgroundColor: '#ffffff',
+    color: '#030303',
     fontSize: '16px',
     fontFamily: 'inherit',
+    marginBottom: '16px',
   },
   button: {
-    backgroundColor: 'black',
+    backgroundColor: '#00C291',
     color: 'white',
     border: 'none',
-    padding: '12px 20px',
-    fontSize: '16px',
-    borderRadius: '8px',
+    padding: '16px 20px',
+    fontSize: '18px',
+    borderRadius: '10px',
     cursor: 'pointer',
     width: '100%',
+    fontWeight: 600,
+    transition: 'background 0.3s ease',
+  },
+  buttonHover: {
+    backgroundColor: '#00A77E',
   },
   success: {
-    color: 'black',
+    color: '#00C291',
     fontWeight: 600,
     textAlign: 'center',
+    fontSize: '20px',
+    padding: '40px 0',
+  },
+  headline: {
+    fontSize: '24px',
+    fontWeight: '700',
+    marginBottom: '12px',
+  },
+  subheadline: {
+    fontSize: '16px',
+    marginBottom: '24px',
+    lineHeight: '1.6',
+  },
+  smallText: {
+    fontSize: '14px',
+    color: '#bbbbbb',
+    textAlign: 'center',
+    marginTop: '12px',
   },
 };
-
 
 const ContactForm = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', comment: '' });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (!submitted) {
+      document.getElementById('email-input')?.focus();
+    }
+  }, [submitted]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -76,8 +126,8 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://flex-spaces-app.onrender.com/submit', form);
-      setSubmitted(true); // Show the success message
+      await axios.post('https://flex-spaces-app.onrender.com/submit', form);
+      setSubmitted(true);
     } catch (err) {
       console.error('Error submitting form:', err);
       alert('There was an issue submitting the form. Please try again.');
@@ -85,20 +135,76 @@ const ContactForm = () => {
   };
 
   return (
-    <div style={styles.outerWrapper}>
-      <div style={styles.container}>
+    <div style={styles.wrapper}>
+      <div style={styles.card}>
         {submitted ? (
-          <div style={styles.success}>Thank you! We'll be in touch soon. 🙌</div>
+          <div style={styles.success}>
+            Thank you! We'll be in touch soon. 🙌
+          </div>
         ) : (
           <form onSubmit={handleSubmit}>
-             <p style={{ color: 'white' }}>Want to be a part of our coworking platform? Share your details with us to express your interest. There is no commitment—just a chance to be among the first to know when we launch!'</p>
-            <input style={styles.input} name="email" placeholder="Email*" type="email" value={form.email} onChange={handleChange} required />
-            <input style={styles.input} name="name" placeholder="Name" value={form.name} onChange={handleChange}/>
-            <input style={styles.input} name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} />
-            <textarea style={styles.textarea} name="comment" placeholder="Comment" value={form.comment} onChange={handleChange} />
-            <button type="submit" style={styles.button}>Submit</button>
+            <div style={styles.headline}>
+              Join the waitlist for early access 
+            </div>
+            <p style={styles.subheadline}>
+              Be the first to know when we launch. No spam, just coworking magic.
+            </p>
+
+            <input
+              id="email-input"
+              style={styles.input}
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleChange}
+              required
+              aria-label="Email address"
+            />
+
+            <input
+              style={styles.input}
+              name="name"
+              placeholder="Full name (optional)"
+              value={form.name}
+              onChange={handleChange}
+              aria-label="Full name"
+            />
+
+            <input
+              style={styles.input}
+              name="phone"
+              placeholder="Phone (optional)"
+              value={form.phone}
+              onChange={handleChange}
+              aria-label="Phone number"
+              type="tel"
+            />
+
+            <textarea
+              style={styles.textarea}
+              name="comment"
+              placeholder="Message (optional)"
+              value={form.comment}
+              onChange={handleChange}
+              aria-label="Your message"
+            />
+
+            <button type="submit" style={styles.button}>
+              Get Early Access
+            </button>
+
+            <p style={styles.smallText}>🔒 Your info is safe. No spam, ever.</p>
           </form>
         )}
+      </div>
+
+      <div style={styles.imageWrapper}>
+        <img
+          src={defaultImage}
+          alt="Coworking office with people"
+          style={styles.image}
+        />
       </div>
     </div>
   );

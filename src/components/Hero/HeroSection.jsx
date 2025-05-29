@@ -8,12 +8,8 @@ import HeroButton from './HeroButton';
 const HeroSection = () => {
   return (
     <div style={{ position: 'relative' }}>
-      <HeroImage />
-      <HeroCard>
-        <HeroTitle />
-        <HeroDescription />
-        <HeroButton />
-      </HeroCard>
+      <Image />
+      <HeroCard/>
     </div>
   );
 };

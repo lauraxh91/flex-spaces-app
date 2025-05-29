@@ -1,18 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react'; // Or use emojis: ☰ and ✖
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X } from 'lucide-react';
 
 const HeaderText = ({ text = 'BookSpace' }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) setMenuOpen(false); // Close menu on resize to desktop
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (!mobile) setMenuOpen(false); // Close menu on resize to desktop
     };
+
+    const handleClickOutside = (e) => {
+      if (menuOpen && menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [menuOpen]);
 
   const containerStyle = {
     display: 'flex',
@@ -52,11 +74,12 @@ const HeaderText = ({ text = 'BookSpace' }) => {
     left: 0,
     width: '100%',
     backgroundColor: '#ffffff',
-    padding: '20px',
+    padding: '20px 24px',
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
-    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+    gap: '20px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+    transition: 'opacity 0.3s ease-in-out',
     zIndex: 999,
   };
 
@@ -74,13 +97,21 @@ const HeaderText = ({ text = 'BookSpace' }) => {
         <>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-            aria-label="Toggle Menu"
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: '8px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+
           {menuOpen && (
-            <div style={mobileMenuStyle}>
+            <div ref={menuRef} style={mobileMenuStyle}>
               <a href="#benefits" style={linkStyle} onClick={() => setMenuOpen(false)}>Benefits</a>
               <a href="#how-it-works" style={linkStyle} onClick={() => setMenuOpen(false)}>How It Works</a>
               <a href="#contact" style={linkStyle} onClick={() => setMenuOpen(false)}>Contact</a>

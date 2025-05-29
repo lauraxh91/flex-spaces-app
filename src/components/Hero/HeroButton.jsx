@@ -14,7 +14,7 @@ const styles = {
     padding: '0px 8px',
     border: '0',
     borderRadius: '8px',
-    backgroundColor: '#5664f5',
+    backgroundColor: '#00C291',
     color: '#ffffff',
     fontSize: '16px',
     fontWeight: 500,
@@ -23,7 +23,7 @@ const styles = {
   },
 };
 
-const HeroButton = ({ label = 'Learn How' }) => {
+const HeroButton = ({ label = 'Join The Waitlist' }) => {
   return (
     <div style={styles.ButtonWrapper}>
       <a href="#contact" style={{ ...styles.Button, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>

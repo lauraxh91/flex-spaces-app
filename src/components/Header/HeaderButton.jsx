@@ -6,7 +6,7 @@ const styles = {
     padding: '0px 8px',
     border: '0',
     borderRadius: '8px',
-    backgroundColor: '#5664f5',
+    backgroundColor: '#00C291',
     color: '#ffffff',
     fontSize: '16px',
     fontWeight: 600,
