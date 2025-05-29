@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultImage from '../../assets/2.jpg';
+import defaultImage from '../../assets/6.jpg';
 
 const styles = {
   wrapper: {
@@ -114,7 +114,9 @@ const CallOut = () => {
             </div>
           ))}
         </div>
-        <button style={styles.button}>Join the Waitlist</button>
+        <a href="#contact" style={{ ...styles.button, textAlign: 'center', display: 'inline-block', textDecoration: 'none' }}>
+  Join the Waitlist
+</a>
       </div>
     </div>
   );

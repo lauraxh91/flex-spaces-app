@@ -135,79 +135,90 @@ const ContactForm = () => {
   };
 
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.card}>
-        {submitted ? (
-          <div style={styles.success}>
-            Thank you! We'll be in touch soon. 🙌
+    <div style={{ ...styles.wrapper, flexDirection: 'column', alignItems: 'center' }}>
+    {submitted ? (
+      <div style={{
+        width: '100%',
+        textAlign: 'center',
+        padding: '80px 20px',
+        backgroundColor: '#2C2E2F',
+        borderRadius: '16px',
+        color: '#00C291',
+        fontSize: '24px',
+        fontWeight: '600',
+      }}>
+        Thank you for joining the waitlist!<br />
+        We’ll be in touch soon with early access. 🙌
+      </div>
+    ) : (
+        <div style={styles.wrapper}>
+          <div style={styles.card}>
+            <form onSubmit={handleSubmit}>
+              <div style={styles.headline}>
+                Join the waitlist for early access 
+              </div>
+              <p style={styles.subheadline}>
+                Be the first to know when we launch. No spam, just coworking magic.
+              </p>
+
+              <input
+                id="email-input"
+                style={styles.input}
+                name="email"
+                type="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                aria-label="Email address"
+              />
+
+              <input
+                style={styles.input}
+                name="name"
+                placeholder="Full name (optional)"
+                value={form.name}
+                onChange={handleChange}
+                aria-label="Full name"
+              />
+
+              <input
+                style={styles.input}
+                name="phone"
+                placeholder="Phone (optional)"
+                value={form.phone}
+                onChange={handleChange}
+                aria-label="Phone number"
+                type="tel"
+              />
+
+              <textarea
+                style={styles.textarea}
+                name="comment"
+                placeholder="Message (optional)"
+                value={form.comment}
+                onChange={handleChange}
+                aria-label="Your message"
+              />
+
+              <button type="submit" style={styles.button}>
+                Get Early Access
+              </button>
+
+              <p style={styles.smallText}>🔒 Your info is safe. No spam, ever.</p>
+            </form>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <div style={styles.headline}>
-              Join the waitlist for early access 
-            </div>
-            <p style={styles.subheadline}>
-              Be the first to know when we launch. No spam, just coworking magic.
-            </p>
 
-            <input
-              id="email-input"
-              style={styles.input}
-              name="email"
-              type="email"
-              placeholder="Email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              aria-label="Email address"
+          <div style={styles.imageWrapper}>
+            <img
+              src={defaultImage}
+              alt="Coworking office with people"
+              style={styles.image}
             />
-
-            <input
-              style={styles.input}
-              name="name"
-              placeholder="Full name (optional)"
-              value={form.name}
-              onChange={handleChange}
-              aria-label="Full name"
-            />
-
-            <input
-              style={styles.input}
-              name="phone"
-              placeholder="Phone (optional)"
-              value={form.phone}
-              onChange={handleChange}
-              aria-label="Phone number"
-              type="tel"
-            />
-
-            <textarea
-              style={styles.textarea}
-              name="comment"
-              placeholder="Message (optional)"
-              value={form.comment}
-              onChange={handleChange}
-              aria-label="Your message"
-            />
-
-            <button type="submit" style={styles.button}>
-              Get Early Access
-            </button>
-
-            <p style={styles.smallText}>🔒 Your info is safe. No spam, ever.</p>
-          </form>
-        )}
-      </div>
-
-      <div style={styles.imageWrapper}>
-        <img
-          src={defaultImage}
-          alt="Coworking office with people"
-          style={styles.image}
-        />
-      </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
-
 export default ContactForm;

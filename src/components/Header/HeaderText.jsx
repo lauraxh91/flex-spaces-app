@@ -85,7 +85,19 @@ const HeaderText = ({ text = 'BookSpace' }) => {
 
   return (
     <div style={containerStyle}>
-      <div style={logoStyle}>{text}</div>
+  <button
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  style={{
+    ...logoStyle,
+    background: 'none',
+    border: 'none',
+    padding: 0,
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+  }}
+>
+  {text}
+</button>
 
       {!isMobile ? (
         <nav style={navStyle}>
