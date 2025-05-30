@@ -202,7 +202,7 @@ const ContactForm = () => {
               />
 
               <button type="submit" style={styles.button}>
-                Get Early Access
+                Submit
               </button>
 
               <p style={styles.smallText}>🔒 Your info is safe. No spam, ever.</p>

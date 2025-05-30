@@ -115,7 +115,7 @@ const CallOut = () => {
           ))}
         </div>
         <a href="#contact" style={{ ...styles.button, textAlign: 'center', display: 'inline-block', textDecoration: 'none' }}>
-  Join the Waitlist
+        I’m Interested
 </a>
       </div>
     </div>

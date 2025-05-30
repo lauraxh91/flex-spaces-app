@@ -23,7 +23,7 @@ const styles = {
   },
 };
 
-const HeroButton = ({ label = 'Join The Waitlist' }) => {
+const HeroButton = ({ label = 'I’m Interested' }) => {
   return (
     <div style={styles.ButtonWrapper}>
       <a href="#contact" style={{ ...styles.Button, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>
