@@ -57,27 +57,23 @@ const HomePage = () => {
         <CallOut />
       </div>
 
-      <div style={{ paddingTop: '1px' }}>
-        <section id="how-it-works">
-          <GettingStartedSection />
-        </section>
-      </div>
+      <section id="how-it-works">
+  <GettingStartedSection />
+</section>
 
-      <div style={{ paddingTop: '20px' }}>
-        <section
-          id="contact"
-          style={{
-            textAlign: 'center',
-            lineHeight: '28px',
-            fontWeight: 700,
-            fontSize: '18px',
-            color: '#030303'
-          }}
-        >
-          <ContactForm />
-          <Footer />
-        </section>
-      </div>
+<section
+  id="contact"
+  style={{
+    textAlign: 'center',
+    lineHeight: '28px',
+    fontWeight: 700,
+    fontSize: '18px',
+    color: '#030303',
+  }}
+>
+  <ContactForm />
+  <Footer />
+</section>
     </div>
   );
 };

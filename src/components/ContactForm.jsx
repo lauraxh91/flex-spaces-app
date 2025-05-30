@@ -166,7 +166,7 @@ const ContactForm = () => {
                 style={styles.input}
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder="Email*"
                 value={form.email}
                 onChange={handleChange}
                 required
@@ -176,7 +176,7 @@ const ContactForm = () => {
               <input
                 style={styles.input}
                 name="name"
-                placeholder="Full name (optional)"
+                placeholder="Full name"
                 value={form.name}
                 onChange={handleChange}
                 aria-label="Full name"
@@ -185,7 +185,7 @@ const ContactForm = () => {
               <input
                 style={styles.input}
                 name="phone"
-                placeholder="Phone (optional)"
+                placeholder="Phone"
                 value={form.phone}
                 onChange={handleChange}
                 aria-label="Phone number"
@@ -195,7 +195,7 @@ const ContactForm = () => {
               <textarea
                 style={styles.textarea}
                 name="comment"
-                placeholder="Message (optional)"
+                placeholder="Message"
                 value={form.comment}
                 onChange={handleChange}
                 aria-label="Your message"
