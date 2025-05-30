@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const getCardStyle = (isMobile) => ({
   position: 'absolute',
-  top: isMobile ? '10px' : '250px',
+  top: isMobile ? '100px' : '250px',
   left: '50%',
   transform: 'translateX(-50%)',
   width: '90%',
