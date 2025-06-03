@@ -6,7 +6,7 @@ const styles = {
   wrapper: {
     width: '100%',
     margin: '0 auto',
-    padding: '60px 20px',
+    padding: '30px 20px',
     backgroundColor: '#202223',
     color: '#ffffff',
     display: 'flex',
@@ -144,7 +144,7 @@ const ContactForm = () => {
         backgroundColor: '#2C2E2F',
         borderRadius: '16px',
         color: '#00C291',
-        fontSize: '24px',
+        fontSize: '20px',
         fontWeight: '600',
       }}>
         Thank you for joining the waitlist!<br />
@@ -155,12 +155,11 @@ const ContactForm = () => {
           <div style={styles.card}>
             <form onSubmit={handleSubmit}>
               <div style={styles.headline}>
-                Join the waitlist for early access 
+                Curious about listing your coworking space?
               </div>
               <p style={styles.subheadline}>
-                Be the first to know when we launch. No spam, just coworking magic.
+                Join our early interest list — we’ll share more soon. 
               </p>
-
               <input
                 id="email-input"
                 style={styles.input}
@@ -205,7 +204,7 @@ const ContactForm = () => {
                 Submit
               </button>
 
-              <p style={styles.smallText}>🔒 Your info is safe. No spam, ever.</p>
+              <p style={styles.smallText}>🔒 Your info is safe.</p>
             </form>
           </div>
 

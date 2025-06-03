@@ -90,7 +90,6 @@ const styles = {
 
 const CallOut = () => {
   const checklistItems = [
-    'Day & week passes — no long-term commitment',
     'Monetize unused desks effortlessly',
     'No disruption to current members',
     'All-in-one platform tools included',
@@ -115,7 +114,7 @@ const CallOut = () => {
           ))}
         </div>
         <a href="#contact" style={{ ...styles.button, textAlign: 'center', display: 'inline-block', textDecoration: 'none' }}>
-        I’m Interested
+  I’m Interested
 </a>
       </div>
     </div>
