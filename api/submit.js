@@ -1,41 +1,36 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import { MongoClient } from 'mongodb';
 
-dotenv.config();
+const uri = process.env.MONGODB_URI;
+const dbName = process.env.MONGODB_DB;
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+let cachedClient = null;
 
-const MONGODB_URI = process.env.MONGODB_URI;
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 20000, // wait 20s before error
-})
-.then(() => console.log('✅ Connected to MongoDB'))
-.catch(err => console.error('❌ MongoDB connection error:', err));
+async function connectToDatabase() {
+  if (cachedClient) return cachedClient;
 
-const formSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  phone: String,
-  comment: String,
-});
+  const client = new MongoClient(uri);
+  await client.connect();
+  cachedClient = client;
+  return client;
+}
 
-const Form = mongoose.model('Form', formSchema);
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-app.post('/submit', async (req, res) => {
   try {
-    const newForm = new Form(req.body);
-    await newForm.save();
-    res.status(200).json({ message: 'Form submitted!' });
+    const client = await connectToDatabase();
+    const db = client.db(dbName);
+    const collection = db.collection('submissions');
+
+    const { name, email, phone, comment } = req.body;
+
+    await collection.insertOne({ name, email, phone, comment });
+
+    return res.status(200).json({ message: 'Form submitted!' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error saving form data' });
+    return res.status(500).json({ error: 'Error saving form data' });
   }
-});
-
-app.listen(3000, () => console.log('Server running on port 3000'));
+}
