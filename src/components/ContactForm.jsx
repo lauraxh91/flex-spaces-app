@@ -147,8 +147,8 @@ const ContactForm = () => {
         fontSize: '20px',
         fontWeight: '600',
       }}>
-        Thank you for joining the waitlist!<br />
-        We’ll be in touch soon with early access. 🙌
+        Thank you!<br />
+        We’ll be in touch soon with more information. 
       </div>
     ) : (
         <div style={styles.wrapper}>
