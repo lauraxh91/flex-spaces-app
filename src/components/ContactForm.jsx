@@ -39,6 +39,7 @@ const styles = {
     backgroundPosition: 'center',
     alignSelf: 'center',
     alignItems: 'center',
+    display: 'block', // visible by default
   },
   image: {
     width: '100%',
@@ -109,6 +110,15 @@ const styles = {
   },
 };
 
+// Media query to hide image on mobile
+const responsiveStyle = `
+  @media (max-width: 768px) {
+    .hide-on-mobile {
+      display: none !important;
+    }
+  }
+`;
+
 const ContactForm = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', comment: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -117,6 +127,11 @@ const ContactForm = () => {
     if (!submitted) {
       document.getElementById('email-input')?.focus();
     }
+
+    const styleTag = document.createElement('style');
+    styleTag.innerHTML = responsiveStyle;
+    document.head.appendChild(styleTag);
+    return () => document.head.removeChild(styleTag);
   }, [submitted]);
 
   const handleChange = (e) => {
@@ -136,21 +151,21 @@ const ContactForm = () => {
 
   return (
     <div style={{ ...styles.wrapper, flexDirection: 'column', alignItems: 'center' }}>
-    {submitted ? (
-      <div style={{
-        width: '100%',
-        textAlign: 'center',
-        padding: '80px 20px',
-        backgroundColor: '#2C2E2F',
-        borderRadius: '16px',
-        color: '#00C291',
-        fontSize: '20px',
-        fontWeight: '600',
-      }}>
-        Thank you!<br />
-        We’ll be in touch soon with more information. 
-      </div>
-    ) : (
+      {submitted ? (
+        <div style={{
+          width: '100%',
+          textAlign: 'center',
+          padding: '80px 20px',
+          backgroundColor: '#2C2E2F',
+          borderRadius: '16px',
+          color: '#00C291',
+          fontSize: '20px',
+          fontWeight: '600',
+        }}>
+          Thank you!<br />
+          We’ll be in touch soon with more information. 
+        </div>
+      ) : (
         <div style={styles.wrapper}>
           <div style={styles.card}>
             <form onSubmit={handleSubmit}>
@@ -208,7 +223,7 @@ const ContactForm = () => {
             </form>
           </div>
 
-          <div style={styles.imageWrapper}>
+          <div style={styles.imageWrapper} className="hide-on-mobile">
             <img
               src={defaultImage}
               alt="Coworking office with people"
@@ -220,4 +235,5 @@ const ContactForm = () => {
     </div>
   );
 };
+
 export default ContactForm;
