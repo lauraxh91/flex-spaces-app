@@ -3,81 +3,56 @@ import axios from "axios";
 import { Menu, X } from "lucide-react";
 import defaultImage from "../../assets/3.webp";
 
-const styles = {
-  // Header styles matching HeaderText component
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "16px 24px",
-    backgroundColor: "#ffffff",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
-    position: "sticky",
-    top: 0,
-    zIndex: 1000,
-  },
-  logo: {
-    color: "#030303",
-    fontSize: "24px",
-    fontWeight: "bold",
-    letterSpacing: "-0.5px",
-    background: "none",
-    border: "none",
-    padding: 0,
-    cursor: "pointer",
-    fontFamily: "inherit",
-  },
-  nav: {
-    display: "flex",
-    gap: "24px",
-  },
-  navLink: {
-    color: "#030303",
-    fontSize: "16px",
-    textDecoration: "none",
-    fontWeight: 500,
-    cursor: "pointer",
-  },
-  mobileMenuButton: {
-    background: "none",
-    border: "none",
-    padding: "8px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-  },
-  mobileMenu: {
-    position: "absolute",
-    top: "64px",
-    left: 0,
-    width: "100%",
-    backgroundColor: "#ffffff",
-    padding: "20px 24px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "20px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-    transition: "opacity 0.3s ease-in-out",
-    zIndex: 999,
-  },
+// Re-using the HeaderText component for a consistent header
+import HeaderText from "../Header/HeaderText";
+import Footer from "../Footer";
 
-  // Hero section styles
-  hero: {
-    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    color: "#fff",
-    padding: "80px 0 60px 0",
-    textAlign: "center",
+const styles = {
+  // Global styles from index.css
+  page: {
+    fontFamily: "'Space Grotesk', sans-serif",
+    color: "#3f3d3d",
+    backgroundColor: "#ffffff", // Default background
   },
-  heroContent: {
+  container: {
     maxWidth: "1100px",
     margin: "0 auto",
     padding: "0 20px",
   },
+  h1: {
+    fontFamily: "'Lexend Deca', sans-serif",
+    fontSize: "32px",
+    fontWeight: 700,
+    color: "#353232",
+  },
+  h2: {
+    fontFamily: "'Lexend Deca', sans-serif",
+    fontSize: "28px",
+    fontWeight: 700,
+    color: "#353232",
+    textAlign: "center",
+    marginBottom: "40px",
+  },
+  h3: {
+    fontFamily: "'Lexend Deca', sans-serif",
+    fontSize: "24px",
+    fontWeight: 700,
+    color: "#353232",
+  },
+
+  // Hero section styles - aligned with HomePage's feel
+  hero: {
+    backgroundColor: "#f9f9f9", // A light grey like other sections
+    color: "#3f3d3d",
+    padding: "60px 0",
+    textAlign: "center",
+  },
   heroTitle: {
+    fontFamily: "'Lexend Deca', sans-serif",
     fontSize: "3em",
     marginBottom: "15px",
-    fontWeight: "600",
-    fontFamily: "Lexend Deca, sans-serif",
+    fontWeight: 700,
+    color: "#353232",
   },
   heroSubtitle: {
     fontSize: "1.2em",
@@ -85,38 +60,28 @@ const styles = {
     maxWidth: "600px",
     marginLeft: "auto",
     marginRight: "auto",
-    opacity: 0.9,
   },
+  // CTA button matching HeroButton and ContactForm
   ctaButton: {
-    display: "inline-block",
-    backgroundColor: "#ffffff",
-    color: "#667eea",
-    padding: "12px 25px",
-    borderRadius: "25px",
-    textDecoration: "none",
-    fontWeight: "bold",
-    transition: "all 0.3s ease",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    border: "none",
     cursor: "pointer",
-    fontSize: "1em",
+    minWidth: "183px",
+    height: "48px",
+    padding: "12px 25px",
+    border: "0",
+    borderRadius: "8px",
+    backgroundColor: "#00C291", // Primary green
+    color: "#ffffff",
+    fontSize: "16px",
+    fontWeight: 500,
+    transition: "background-color 0.3s ease",
+    textDecoration: "none",
+    display: "inline-block",
   },
 
   // Section styles
   section: {
     padding: "60px 0",
-  },
-  sectionTitle: {
-    textAlign: "center",
-    fontSize: "2.2em",
-    marginBottom: "40px",
-    color: "#444",
-    fontFamily: "Lexend Deca, sans-serif",
-  },
-  container: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "0 20px",
+    borderTop: "1px solid #e0e0e0",
   },
 
   // How it works styles
@@ -133,17 +98,11 @@ const styles = {
   },
   stepIcon: {
     fontSize: "3em",
-    color: "#764ba2",
+    color: "#00C291", // Using primary green
     marginBottom: "15px",
   },
-  stepTitle: {
-    fontSize: "1.4em",
-    marginBottom: "10px",
-    color: "#555",
-    fontFamily: "Lexend Deca, sans-serif",
-  },
 
-  // Demo grid styles
+  // Demo grid styles (coworking cards)
   demoGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
@@ -157,29 +116,17 @@ const styles = {
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
   },
   imageContainer: {
-    position: "relative",
     width: "100%",
-    height: 0,
-    paddingBottom: "66.67%",
+    height: "200px", // Fixed height for consistency
     overflow: "hidden",
   },
   cardImage: {
-    position: "absolute",
-    top: 0,
-    left: 0,
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    objectPosition: "center",
   },
   cardContent: {
     padding: "20px",
-  },
-  cardTitle: {
-    marginBottom: "10px",
-    fontSize: "1.5em",
-    color: "#333",
-    fontFamily: "Lexend Deca, sans-serif",
   },
   featuresList: {
     listStyle: "none",
@@ -189,32 +136,31 @@ const styles = {
     color: "#555",
   },
   featureItem: {
-    marginBottom: "5px",
+    marginBottom: "8px",
     paddingLeft: "20px",
     position: "relative",
   },
-  featureItemBefore: {
-    content: '"✓"',
+  featureCheck: {
     position: "absolute",
     left: 0,
-    color: "#667eea",
+    color: "#00C291", // Primary green
     fontWeight: "bold",
   },
   bookButton: {
-    display: "block",
-    width: "100%",
-    backgroundColor: "#667eea",
-    color: "#fff",
-    border: "none",
-    padding: "10px 15px",
-    borderRadius: "5px",
-    textAlign: "center",
-    fontWeight: "bold",
     cursor: "pointer",
+    width: "100%",
+    height: "44px",
+    padding: "0px 8px",
+    border: "0",
+    borderRadius: "8px",
+    backgroundColor: "#030303", // Dark button for contrast inside card
+    color: "#ffffff",
+    fontSize: "16px",
+    fontWeight: 500,
     transition: "background-color 0.3s ease",
   },
 
-  // Signup section styles matching ContactForm
+  // Signup form styles matching ContactForm.jsx exactly
   signupSection: {
     backgroundColor: "#202223",
     color: "#ffffff",
@@ -224,14 +170,13 @@ const styles = {
     width: "100%",
     margin: "0 auto",
     padding: "30px 20px",
-    backgroundColor: "#202223",
-    color: "#ffffff",
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     gap: "40px",
     alignItems: "stretch",
     justifyContent: "center",
+    maxWidth: "1100px",
   },
   signupCard: {
     flex: "1 1 48%",
@@ -245,24 +190,17 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
   },
-  imageWrapper: {
+  formImageWrapper: {
     flex: "1 1 48%",
     minWidth: "320px",
     maxWidth: "600px",
-    height: "100%",
     borderRadius: "16px",
     overflow: "hidden",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    alignSelf: "center",
-    alignItems: "center",
-    display: "block",
   },
-  image: {
+  formImage: {
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    borderRadius: "16px",
   },
   input: {
     width: "100%",
@@ -274,19 +212,37 @@ const styles = {
     color: "#030303",
     fontSize: "16px",
     marginBottom: "16px",
+    fontFamily: "'Space Grotesk', sans-serif",
   },
   select: {
     width: "100%",
     height: "44px",
-    padding: "10px 14px",
+    padding: "0 14px",
     borderRadius: "10px",
     border: "1px solid #cccccc",
     backgroundColor: "#ffffff",
     color: "#030303",
     fontSize: "16px",
     marginBottom: "16px",
+    fontFamily: "'Space Grotesk', sans-serif",
+    background:
+      "url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5z%22%20fill%3D%22%23555%22/%3E%3C/svg%3E') no-repeat right 14px center",
+    appearance: "none",
   },
-  button: {
+  textarea: {
+    width: "100%",
+    minHeight: "80px",
+    padding: "10px 14px",
+    borderRadius: "10px",
+    border: "1px solid #cccccc",
+    backgroundColor: "#ffffff",
+    color: "#030303",
+    fontSize: "16px",
+    fontFamily: "'Space Grotesk', sans-serif",
+    marginBottom: "16px",
+  },
+  formButton: {
+    // The green one
     backgroundColor: "#00C291",
     color: "white",
     border: "none",
@@ -298,22 +254,18 @@ const styles = {
     fontWeight: 600,
     transition: "background 0.3s ease",
   },
-  success: {
-    color: "#00C291",
-    fontWeight: 600,
-    textAlign: "center",
-    fontSize: "20px",
-    padding: "40px 0",
-  },
-  headline: {
+  formHeadline: {
+    fontFamily: "'Lexend Deca', sans-serif",
     fontSize: "24px",
     fontWeight: "700",
     marginBottom: "12px",
+    color: "#ffffff",
   },
-  subheadline: {
+  formSubheadline: {
     fontSize: "16px",
     marginBottom: "24px",
     lineHeight: "1.6",
+    color: "#e0e0e0",
   },
   smallText: {
     fontSize: "14px",
@@ -323,27 +275,18 @@ const styles = {
   },
   radioGroup: {
     marginBottom: "16px",
+    color: "#e0e0e0",
   },
   radioLabel: {
     display: "block",
-    marginBottom: "8px",
+    marginBottom: "12px",
     fontSize: "16px",
-    color: "#ffffff",
     cursor: "pointer",
   },
   radioInput: {
-    marginRight: "8px",
+    marginRight: "10px",
     verticalAlign: "middle",
-  },
-
-  // Footer styles matching Footer component
-  footer: {
-    textAlign: "center",
-    fontSize: "14px",
-    color: "#555",
-    marginTop: "20px",
-    padding: "20px 0",
-    backgroundColor: "#f1f1f1",
+    accentColor: "#00C291", // Green radio button
   },
 };
 
@@ -366,31 +309,14 @@ const WorkspacesPage = () => {
     important_factor: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     // Prevent scroll restoration
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
-
-    // Remove hash if present
-    if (window.location.hash) {
-      window.history.replaceState(null, "", window.location.pathname);
-    }
-
     // Scroll to top
     window.scrollTo(0, 0);
-
-    // Mobile menu handling
-    const handleResize = () => {
-      const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
-      if (!mobile) setMenuOpen(false);
-    };
-
-    window.addEventListener("resize", handleResize);
 
     // Add responsive styles
     const styleTag = document.createElement("style");
@@ -398,7 +324,6 @@ const WorkspacesPage = () => {
     document.head.appendChild(styleTag);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
       document.head.removeChild(styleTag);
     };
   }, []);
@@ -509,70 +434,13 @@ const WorkspacesPage = () => {
   };
 
   return (
-    <div>
-      {/* Header matching HeaderText component */}
-      <div style={styles.header}>
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          style={styles.logo}
-        >
-          BookSpace
-        </button>
-
-        {!isMobile ? (
-          <nav style={styles.nav}>
-            <a href="#how-it-works" style={styles.navLink}>
-              How It Works
-            </a>
-            <a href="#demo" style={styles.navLink}>
-              Spaces
-            </a>
-            <a href="#signup" style={styles.navLink}>
-              Sign Up
-            </a>
-          </nav>
-        ) : (
-          <>
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              style={styles.mobileMenuButton}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-            >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-
-            {menuOpen && (
-              <div style={styles.mobileMenu}>
-                <a
-                  href="#how-it-works"
-                  style={styles.navLink}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  How It Works
-                </a>
-                <a
-                  href="#demo"
-                  style={styles.navLink}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Spaces
-                </a>
-                <a
-                  href="#signup"
-                  style={styles.navLink}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Sign Up
-                </a>
-              </div>
-            )}
-          </>
-        )}
-      </div>
+    <div style={styles.page}>
+      {/* Re-using the HeaderText component */}
+      <HeaderText text="BookSpace" />
 
       {/* Hero Section */}
       <header style={styles.hero}>
-        <div style={styles.heroContent}>
+        <div style={styles.container}>
           <h1 style={styles.heroTitle}>
             Find Your Perfect Workspace, Instantly.
           </h1>
@@ -590,11 +458,11 @@ const WorkspacesPage = () => {
       {/* How It Works Section */}
       <section id="how-it-works" style={styles.section}>
         <div style={styles.container}>
-          <h2 style={styles.sectionTitle}>How It Works</h2>
+          <h2 style={styles.h2}>How It Works</h2>
           <div style={styles.howItWorksSteps}>
             <div style={styles.step}>
               <div style={styles.stepIcon}>📍</div>
-              <h3 style={styles.stepTitle}>1. Discover</h3>
+              <h3 style={styles.h3}>1. Discover</h3>
               <p>
                 Browse a curated selection of coworking spaces wherever your
                 journey takes you.
@@ -602,7 +470,7 @@ const WorkspacesPage = () => {
             </div>
             <div style={styles.step}>
               <div style={styles.stepIcon}>🖱️</div>
-              <h3 style={styles.stepTitle}>2. Book</h3>
+              <h3 style={styles.h3}>2. Book</h3>
               <p>
                 Choose your space, pick a date, and confirm your booking with
                 lightning-fast checkout.
@@ -610,7 +478,7 @@ const WorkspacesPage = () => {
             </div>
             <div style={styles.step}>
               <div style={styles.stepIcon}>💻</div>
-              <h3 style={styles.stepTitle}>3. Work</h3>
+              <h3 style={styles.h3}>3. Work</h3>
               <p>
                 Show up, connect, and enjoy a productive day in a vibrant
                 workspace environment.
@@ -623,7 +491,7 @@ const WorkspacesPage = () => {
       {/* Demo Section */}
       <section id="demo" style={styles.section}>
         <div style={styles.container}>
-          <h2 style={styles.sectionTitle}>Explore Spaces in Bali (Demo)</h2>
+          <h2 style={styles.h2}>Explore Spaces in Bali (Demo)</h2>
           <div style={styles.demoGrid}>
             {coworkingSpaces.map((space) => (
               <div key={space.id} style={styles.coworkingCard}>
@@ -635,11 +503,11 @@ const WorkspacesPage = () => {
                   />
                 </div>
                 <div style={styles.cardContent}>
-                  <h3 style={styles.cardTitle}>{space.name}</h3>
+                  <h3 style={styles.h3}>{space.name}</h3>
                   <ul style={styles.featuresList}>
                     {space.features.map((feature, index) => (
                       <li key={index} style={styles.featureItem}>
-                        <span style={styles.featureItemBefore}>✓</span>
+                        <span style={styles.featureCheck}>✓</span>
                         {feature}
                       </li>
                     ))}
@@ -663,11 +531,10 @@ const WorkspacesPage = () => {
           {submitted ? (
             <div
               style={{
+                ...styles.signupCard,
                 width: "100%",
                 textAlign: "center",
                 padding: "80px 20px",
-                backgroundColor: "#2C2E2F",
-                borderRadius: "16px",
                 color: "#00C291",
                 fontSize: "20px",
                 fontWeight: "600",
@@ -681,8 +548,8 @@ const WorkspacesPage = () => {
             <div style={styles.signupWrapper}>
               <div style={styles.signupCard}>
                 <form onSubmit={handleSubmit}>
-                  <div style={styles.headline}>Be the First to Know!</div>
-                  <p style={styles.subheadline}>
+                  <div style={styles.formHeadline}>Be the First to Know!</div>
+                  <p style={styles.formSubheadline}>
                     Sign up to get notified when we launch and receive early
                     bird offers.
                   </p>
@@ -737,76 +604,38 @@ const WorkspacesPage = () => {
                   </select>
 
                   <div style={styles.radioGroup}>
-                    <label style={styles.radioLabel}>
+                    <p
+                      style={{
+                        ...styles.formSubheadline,
+                        marginBottom: "12px",
+                      }}
+                    >
                       What's MOST important when choosing a coworking space?*
-                    </label>
-                    <label style={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        name="important_factor"
-                        value="price"
-                        checked={form.important_factor === "price"}
-                        onChange={handleChange}
-                        required
-                        style={styles.radioInput}
-                      />
-                      Price
-                    </label>
-                    <label style={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        name="important_factor"
-                        value="location"
-                        checked={form.important_factor === "location"}
-                        onChange={handleChange}
-                        style={styles.radioInput}
-                      />
-                      Location/Convenience
-                    </label>
-                    <label style={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        name="important_factor"
-                        value="community"
-                        checked={form.important_factor === "community"}
-                        onChange={handleChange}
-                        style={styles.radioInput}
-                      />
-                      Community/Events
-                    </label>
-                    <label style={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        name="important_factor"
-                        value="amenities"
-                        checked={form.important_factor === "amenities"}
-                        onChange={handleChange}
-                        style={styles.radioInput}
-                      />
-                      Amenities (Pool, Cafe, Yoga studio, etc.)
-                    </label>
-                    <label style={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        name="important_factor"
-                        value="wifi"
-                        checked={form.important_factor === "wifi"}
-                        onChange={handleChange}
-                        style={styles.radioInput}
-                      />
-                      Wi-Fi Speed/Reliability
-                    </label>
-                    <label style={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        name="important_factor"
-                        value="other"
-                        checked={form.important_factor === "other"}
-                        onChange={handleChange}
-                        style={styles.radioInput}
-                      />
-                      Other
-                    </label>
+                    </p>
+                    {[
+                      { value: "price", label: "Price" },
+                      { value: "location", label: "Location/Convenience" },
+                      { value: "community", label: "Community/Events" },
+                      {
+                        value: "amenities",
+                        label: "Amenities (Pool, Cafe, etc.)",
+                      },
+                      { value: "wifi", label: "Wi-Fi Speed/Reliability" },
+                      { value: "other", label: "Other" },
+                    ].map((item) => (
+                      <label key={item.value} style={styles.radioLabel}>
+                        <input
+                          type="radio"
+                          name="important_factor"
+                          value={item.value}
+                          checked={form.important_factor === item.value}
+                          onChange={handleChange}
+                          required
+                          style={styles.radioInput}
+                        />
+                        {item.label}
+                      </label>
+                    ))}
                   </div>
 
                   <textarea
@@ -818,7 +647,7 @@ const WorkspacesPage = () => {
                     aria-label="Additional comments"
                   />
 
-                  <button type="submit" style={styles.button}>
+                  <button type="submit" style={styles.formButton}>
                     Notify Me!
                   </button>
 
@@ -826,11 +655,11 @@ const WorkspacesPage = () => {
                 </form>
               </div>
 
-              <div style={styles.imageWrapper} className="hide-on-mobile">
+              <div style={styles.formImageWrapper} className="hide-on-mobile">
                 <img
                   src={defaultImage}
                   alt="Coworking office with people"
-                  style={styles.image}
+                  style={styles.formImage}
                 />
               </div>
             </div>
@@ -838,12 +667,7 @@ const WorkspacesPage = () => {
         </div>
       </section>
 
-      {/* Footer matching Footer component */}
-      <footer style={styles.footer}>
-        <div style={styles.container}>
-          <p>© {new Date().getFullYear()} BookSpace. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
