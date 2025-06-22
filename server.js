@@ -1,7 +1,7 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -11,26 +11,54 @@ app.use(express.json());
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-mongoose.connect(MONGODB_URI).then(() => console.log('Connected to MongoDB')).catch(err => console.error(err));
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error(err));
 
-const formSchema = new mongoose.Schema({
+// Supply form schema (original contact form for coworking space owners)
+const supplyFormSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
   comment: String,
 });
 
-const Form = mongoose.model('Form', formSchema);
+// Demand form schema (workspaces form for users looking for spaces)
+const demandFormSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  phone: String,
+  comment: String,
+  frequency: String,
+  important_factor: String,
+});
 
-app.post('/submit', async (req, res) => {
+const SupplyForm = mongoose.model("SupplyForm", supplyFormSchema);
+const DemandForm = mongoose.model("DemandForm", demandFormSchema);
+
+// Supply submit endpoint (original contact form)
+app.post("/api/supplysubmit", async (req, res) => {
   try {
-    const newForm = new Form(req.body);
+    const newForm = new SupplyForm(req.body);
     await newForm.save();
-    res.status(200).json({ message: 'Form submitted!' });
+    res.status(200).json({ message: "Form submitted!" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error saving form data' });
+    res.status(500).json({ message: "Error saving form data" });
   }
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+// Demand submit endpoint (workspaces form)
+app.post("/api/demandsubmit", async (req, res) => {
+  try {
+    const newForm = new DemandForm(req.body);
+    await newForm.save();
+    res.status(200).json({ message: "Form submitted!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error saving form data" });
+  }
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));

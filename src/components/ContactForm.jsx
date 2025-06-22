@@ -1,112 +1,112 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import defaultImage from '../assets/3.webp';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import defaultImage from "../assets/3.webp";
 
 const styles = {
   wrapper: {
-    width: '100%',
-    margin: '0 auto',
-    padding: '30px 20px',
-    backgroundColor: '#202223',
-    color: '#ffffff',
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: '40px',
-    alignItems: 'stretch',
-    justifyContent: 'center',
+    width: "100%",
+    margin: "0 auto",
+    padding: "30px 20px",
+    backgroundColor: "#202223",
+    color: "#ffffff",
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: "40px",
+    alignItems: "stretch",
+    justifyContent: "center",
   },
   card: {
-    flex: '1 1 48%',
-    minWidth: '320px',
-    maxWidth: '600px',
-    backgroundColor: '#2C2E2F',
-    borderRadius: '16px',
-    padding: '32px',
-    boxShadow: '0 0 20px rgba(0,0,0,0.3)',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flex: "1 1 48%",
+    minWidth: "320px",
+    maxWidth: "600px",
+    backgroundColor: "#2C2E2F",
+    borderRadius: "16px",
+    padding: "32px",
+    boxShadow: "0 0 20px rgba(0,0,0,0.3)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
   imageWrapper: {
-    flex: '1 1 48%',
-    minWidth: '320px',
-    maxWidth: '600px',
-    height: '100%',
-    borderRadius: '16px',
-    overflow: 'hidden',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    alignSelf: 'center',
-    alignItems: 'center',
-    display: 'block', // visible by default
+    flex: "1 1 48%",
+    minWidth: "320px",
+    maxWidth: "600px",
+    height: "100%",
+    borderRadius: "16px",
+    overflow: "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    alignSelf: "center",
+    alignItems: "center",
+    display: "block", // visible by default
   },
   image: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    borderRadius: '16px',
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: "16px",
   },
   input: {
-    width: '100%',
-    height: '44px',
-    padding: '10px 14px',
-    borderRadius: '10px',
-    border: '1px solid #cccccc',
-    backgroundColor: '#ffffff',
-    color: '#030303',
-    fontSize: '16px',
-    marginBottom: '16px',
+    width: "100%",
+    height: "44px",
+    padding: "10px 14px",
+    borderRadius: "10px",
+    border: "1px solid #cccccc",
+    backgroundColor: "#ffffff",
+    color: "#030303",
+    fontSize: "16px",
+    marginBottom: "16px",
   },
   textarea: {
-    width: '100%',
-    height: '80px',
-    padding: '10px 14px',
-    borderRadius: '10px',
-    border: '1px solid #cccccc',
-    backgroundColor: '#ffffff',
-    color: '#030303',
-    fontSize: '16px',
-    fontFamily: 'inherit',
-    marginBottom: '16px',
+    width: "100%",
+    height: "80px",
+    padding: "10px 14px",
+    borderRadius: "10px",
+    border: "1px solid #cccccc",
+    backgroundColor: "#ffffff",
+    color: "#030303",
+    fontSize: "16px",
+    fontFamily: "inherit",
+    marginBottom: "16px",
   },
   button: {
-    backgroundColor: '#00C291',
-    color: 'white',
-    border: 'none',
-    padding: '16px 20px',
-    fontSize: '18px',
-    borderRadius: '10px',
-    cursor: 'pointer',
-    width: '100%',
+    backgroundColor: "#00C291",
+    color: "white",
+    border: "none",
+    padding: "16px 20px",
+    fontSize: "18px",
+    borderRadius: "10px",
+    cursor: "pointer",
+    width: "100%",
     fontWeight: 600,
-    transition: 'background 0.3s ease',
+    transition: "background 0.3s ease",
   },
   buttonHover: {
-    backgroundColor: '#00A77E',
+    backgroundColor: "#00A77E",
   },
   success: {
-    color: '#00C291',
+    color: "#00C291",
     fontWeight: 600,
-    textAlign: 'center',
-    fontSize: '20px',
-    padding: '40px 0',
+    textAlign: "center",
+    fontSize: "20px",
+    padding: "40px 0",
   },
   headline: {
-    fontSize: '24px',
-    fontWeight: '700',
-    marginBottom: '12px',
+    fontSize: "24px",
+    fontWeight: "700",
+    marginBottom: "12px",
   },
   subheadline: {
-    fontSize: '16px',
-    marginBottom: '24px',
-    lineHeight: '1.6',
+    fontSize: "16px",
+    marginBottom: "24px",
+    lineHeight: "1.6",
   },
   smallText: {
-    fontSize: '14px',
-    color: '#bbbbbb',
-    textAlign: 'center',
-    marginTop: '12px',
+    fontSize: "14px",
+    color: "#bbbbbb",
+    textAlign: "center",
+    marginTop: "12px",
   },
 };
 
@@ -120,15 +120,20 @@ const responsiveStyle = `
 `;
 
 const ContactForm = () => {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', comment: '' });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    comment: "",
+  });
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (!submitted) {
-      document.getElementById('email-input')?.focus();
+      document.getElementById("email-input")?.focus();
     }
 
-    const styleTag = document.createElement('style');
+    const styleTag = document.createElement("style");
     styleTag.innerHTML = responsiveStyle;
     document.head.appendChild(styleTag);
     return () => document.head.removeChild(styleTag);
@@ -141,29 +146,38 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/submit', form);
+      await axios.post("/api/supplysubmit", form);
       setSubmitted(true);
     } catch (err) {
-      console.error('Error submitting form:', err);
-      alert('There was an issue submitting the form. Please try again.');
+      console.error("Error submitting form:", err);
+      alert("There was an issue submitting the form. Please try again.");
     }
   };
 
   return (
-    <div style={{ ...styles.wrapper, flexDirection: 'column', alignItems: 'center' }}>
+    <div
+      style={{
+        ...styles.wrapper,
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {submitted ? (
-        <div style={{
-          width: '100%',
-          textAlign: 'center',
-          padding: '80px 20px',
-          backgroundColor: '#2C2E2F',
-          borderRadius: '16px',
-          color: '#00C291',
-          fontSize: '20px',
-          fontWeight: '600',
-        }}>
-          Thank you!<br />
-          We’ll be in touch soon with more information. 
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center",
+            padding: "80px 20px",
+            backgroundColor: "#2C2E2F",
+            borderRadius: "16px",
+            color: "#00C291",
+            fontSize: "20px",
+            fontWeight: "600",
+          }}
+        >
+          Thank you!
+          <br />
+          We'll be in touch soon with more information.
         </div>
       ) : (
         <div style={styles.wrapper}>
@@ -173,7 +187,7 @@ const ContactForm = () => {
                 Curious about listing your coworking space?
               </div>
               <p style={styles.subheadline}>
-                Join our early interest list — we’ll share more soon. 
+                Join our early interest list — we'll share more soon.
               </p>
               <input
                 id="email-input"
