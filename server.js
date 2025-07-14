@@ -1,7 +1,7 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -11,26 +11,17 @@ app.use(express.json());
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-mongoose.connect(MONGODB_URI).then(() => console.log('Connected to MongoDB')).catch(err => console.error(err));
+// Connect to MongoDB
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error(err));
 
-const formSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  phone: String,
-  comment: String,
+// The submission logic is now handled by the files in the /api directory.
+// This server.js file can be used for other API routes or removed if not needed.
+
+app.get("/", (req, res) => {
+  res.send("Server is running.");
 });
 
-const Form = mongoose.model('Form', formSchema);
-
-app.post('/submit', async (req, res) => {
-  try {
-    const newForm = new Form(req.body);
-    await newForm.save();
-    res.status(200).json({ message: 'Form submitted!' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Error saving form data' });
-  }
-});
-
-app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(3000, () => console.log("Server running on port 3000"));
