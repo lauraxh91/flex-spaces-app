@@ -7,6 +7,12 @@ import defaultImage from "../../assets/3.webp";
 import HeaderText from "../Header/HeaderText";
 import Footer from "../Footer";
 
+import appScreen1 from "../appScreens/1 - Launch BookSpace.png";
+import appScreen2 from "../appScreens/2 - Top up.png";
+import appScreen3 from "../appScreens/3 - Find spaces.png";
+import appScreen4 from "../appScreens/4 - Check features.png";
+import appScreen5 from "../appScreens/5 - Book & check in.png";
+
 const styles = {
   // Global styles from index.css
   page: {
@@ -14,10 +20,11 @@ const styles = {
     color: "#3f3d3d",
     backgroundColor: "#ffffff", // Default background
   },
-  container: {
-    maxWidth: "1100px",
+  pageContainer: {
+    width: "100%",
+    maxWidth: "1200px",
     margin: "0 auto",
-    padding: "0 20px",
+    padding: "0 24px",
   },
   h1: {
     fontFamily: "'Lexend Deca', sans-serif",
@@ -164,19 +171,18 @@ const styles = {
   signupSection: {
     backgroundColor: "#202223",
     color: "#ffffff",
-    padding: "60px 0",
+    // The padding is now handled by the wrapper inside
   },
   signupWrapper: {
-    width: "100%",
+    maxWidth: "1100px",
     margin: "0 auto",
-    padding: "30px 20px",
+    padding: "30px 20px", // Exact padding match with ContactForm
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     gap: "40px",
     alignItems: "stretch",
     justifyContent: "center",
-    maxWidth: "1100px",
   },
   signupCard: {
     flex: "1 1 48%",
@@ -196,6 +202,7 @@ const styles = {
     maxWidth: "600px",
     borderRadius: "16px",
     overflow: "hidden",
+    height: "100%", // Added missing height to ensure equal column size
   },
   formImage: {
     width: "100%",
@@ -220,13 +227,13 @@ const styles = {
     padding: "0 14px",
     borderRadius: "10px",
     border: "1px solid #cccccc",
-    backgroundColor: "#ffffff",
     color: "#030303",
     fontSize: "16px",
     marginBottom: "16px",
     fontFamily: "'Space Grotesk', sans-serif",
-    background:
-      "url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5z%22%20fill%3D%22%23555%22/%3E%3C/svg%3E') no-repeat right 14px center",
+    backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width='20'%20height='20'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M5%208l5%205%205-5z'%20fill='%23555'/%3E%3C/svg%3E")`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right 14px center",
     appearance: "none",
   },
   textarea: {
@@ -287,6 +294,13 @@ const styles = {
     marginRight: "10px",
     verticalAlign: "middle",
     accentColor: "#00C291", // Green radio button
+  },
+
+  // A container style to constrain section width, like .page-container
+  sectionContainer: {
+    maxWidth: "1200px",
+    margin: "0 auto",
+    padding: "0 24px",
   },
 };
 
@@ -433,14 +447,16 @@ const WorkspacesPage = () => {
     }
   };
 
+  const isFrequencyPlaceholder = form.frequency === "";
+
   return (
     <div style={styles.page}>
-      {/* Re-using the HeaderText component */}
+      {/* All content is within the main div, no extra wrappers */}
       <HeaderText text="BookSpace" />
 
       {/* Hero Section */}
       <header style={styles.hero}>
-        <div style={styles.container}>
+        <div style={styles.sectionContainer}>
           <h1 style={styles.heroTitle}>
             Find Your Perfect Workspace, Instantly.
           </h1>
@@ -456,8 +472,8 @@ const WorkspacesPage = () => {
       </header>
 
       {/* How It Works Section */}
-      <section id="how-it-works" style={styles.section}>
-        <div style={styles.container}>
+      <section style={styles.section}>
+        <div style={styles.sectionContainer}>
           <h2 style={styles.h2}>How It Works</h2>
           <div style={styles.howItWorksSteps}>
             <div style={styles.step}>
@@ -488,36 +504,62 @@ const WorkspacesPage = () => {
         </div>
       </section>
 
-      {/* Demo Section */}
-      <section id="demo" style={styles.section}>
-        <div style={styles.container}>
-          <h2 style={styles.h2}>Explore Spaces in Bali (Demo)</h2>
-          <div style={styles.demoGrid}>
-            {coworkingSpaces.map((space) => (
-              <div key={space.id} style={styles.coworkingCard}>
-                <div style={styles.imageContainer}>
-                  <img
-                    src={space.image}
-                    alt={`${space.name} Coworking Space`}
-                    style={styles.cardImage}
-                  />
-                </div>
-                <div style={styles.cardContent}>
-                  <h3 style={styles.h3}>{space.name}</h3>
-                  <ul style={styles.featuresList}>
-                    {space.features.map((feature, index) => (
-                      <li key={index} style={styles.featureItem}>
-                        <span style={styles.featureCheck}>✓</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    style={styles.bookButton}
-                    onClick={() => handleBookNow(space.name)}
-                  >
-                    Book Now
-                  </button>
+      {/* App Preview Section */}
+      <section style={styles.section}>
+        <div style={styles.sectionContainer}>
+          <h2 style={styles.h2}>App Preview</h2>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "32px",
+              justifyContent: "center",
+              alignItems: "flex-start",
+            }}
+          >
+            {[
+              { file: appScreen1, label: "Home Screen" },
+              { file: appScreen2, label: "Membership page" },
+              { file: appScreen3, label: "Search page" },
+              { file: appScreen4, label: "Workspace profile" },
+              { file: appScreen5, label: "Booking confirmation" },
+            ].map((screen, idx) => (
+              <div
+                key={idx}
+                style={{
+                  maxWidth: 300,
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  background: "#fff",
+                  borderRadius: 16,
+                  boxShadow: "0 5px 15px rgba(0,0,0,0.08)",
+                  padding: 16,
+                }}
+              >
+                <img
+                  src={screen.file}
+                  alt={screen.label}
+                  style={{
+                    width: "100%",
+                    maxWidth: 270,
+                    height: "auto",
+                    borderRadius: 12,
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+                  }}
+                />
+                <div
+                  style={{
+                    marginTop: 12,
+                    fontFamily: "'Lexend Deca', sans-serif",
+                    fontWeight: 600,
+                    fontSize: 18,
+                    textAlign: "center",
+                    color: "#353232",
+                  }}
+                >
+                  {screen.label}
                 </div>
               </div>
             ))}
@@ -525,14 +567,20 @@ const WorkspacesPage = () => {
         </div>
       </section>
 
-      {/* Signup Section matching ContactForm styling */}
+      {/* Signup Section - full width background, centered content */}
       <section id="signup" style={styles.signupSection}>
-        <div style={styles.container}>
-          {submitted ? (
+        {submitted ? (
+          <div
+            style={{
+              ...styles.signupWrapper,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <div
               style={{
                 ...styles.signupCard,
-                width: "100%",
+                maxWidth: "600px",
                 textAlign: "center",
                 padding: "80px 20px",
                 color: "#00C291",
@@ -544,127 +592,130 @@ const WorkspacesPage = () => {
               <br />
               We'll notify you upon launch.
             </div>
-          ) : (
-            <div style={styles.signupWrapper}>
-              <div style={styles.signupCard}>
-                <form onSubmit={handleSubmit}>
-                  <div style={styles.formHeadline}>Be the First to Know!</div>
-                  <p style={styles.formSubheadline}>
-                    Sign up to get notified when we launch and receive early
-                    bird offers.
-                  </p>
+          </div>
+        ) : (
+          <div style={styles.signupWrapper}>
+            <div style={styles.signupCard}>
+              <form onSubmit={handleSubmit}>
+                <div style={styles.formHeadline}>Be the First to Know!</div>
+                <p style={styles.formSubheadline}>
+                  Sign up to get notified when we launch and receive early bird
+                  offers.
+                </p>
 
-                  <input
-                    style={styles.input}
-                    name="email"
-                    type="email"
-                    placeholder="Email*"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    aria-label="Email address"
-                  />
-
-                  <input
-                    style={styles.input}
-                    name="name"
-                    placeholder="Full name"
-                    value={form.name}
-                    onChange={handleChange}
-                    aria-label="Full name"
-                  />
-
-                  <input
-                    style={styles.input}
-                    name="phone"
-                    placeholder="Phone"
-                    value={form.phone}
-                    onChange={handleChange}
-                    aria-label="Phone number"
-                    type="tel"
-                  />
-
-                  <select
-                    style={styles.select}
-                    name="frequency"
-                    value={form.frequency}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="" disabled>
-                      How often do you use coworking spaces?*
-                    </option>
-                    <option value="daily">Daily</option>
-                    <option value="few_times_week">A few times a week</option>
-                    <option value="few_times_month">A few times a month</option>
-                    <option value="rarely">
-                      Rarely (special occasions/travel)
-                    </option>
-                    <option value="never">Never (but interested)</option>
-                  </select>
-
-                  <div style={styles.radioGroup}>
-                    <p
-                      style={{
-                        ...styles.formSubheadline,
-                        marginBottom: "12px",
-                      }}
-                    >
-                      What's MOST important when choosing a coworking space?*
-                    </p>
-                    {[
-                      { value: "price", label: "Price" },
-                      { value: "location", label: "Location/Convenience" },
-                      { value: "community", label: "Community/Events" },
-                      {
-                        value: "amenities",
-                        label: "Amenities (Pool, Cafe, etc.)",
-                      },
-                      { value: "wifi", label: "Wi-Fi Speed/Reliability" },
-                      { value: "other", label: "Other" },
-                    ].map((item) => (
-                      <label key={item.value} style={styles.radioLabel}>
-                        <input
-                          type="radio"
-                          name="important_factor"
-                          value={item.value}
-                          checked={form.important_factor === item.value}
-                          onChange={handleChange}
-                          required
-                          style={styles.radioInput}
-                        />
-                        {item.label}
-                      </label>
-                    ))}
-                  </div>
-
-                  <textarea
-                    style={styles.textarea}
-                    name="comment"
-                    placeholder="Additional comments (optional)"
-                    value={form.comment}
-                    onChange={handleChange}
-                    aria-label="Additional comments"
-                  />
-
-                  <button type="submit" style={styles.formButton}>
-                    Notify Me!
-                  </button>
-
-                  <p style={styles.smallText}>🔒 Your info is safe.</p>
-                </form>
-              </div>
-
-              <div style={styles.formImageWrapper} className="hide-on-mobile">
-                <img
-                  src={defaultImage}
-                  alt="Coworking office with people"
-                  style={styles.formImage}
+                <input
+                  style={styles.input}
+                  name="email"
+                  type="email"
+                  placeholder="Email*"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  aria-label="Email address"
                 />
-              </div>
+
+                <input
+                  style={styles.input}
+                  name="name"
+                  placeholder="Full name"
+                  value={form.name}
+                  onChange={handleChange}
+                  aria-label="Full name"
+                />
+
+                <input
+                  style={styles.input}
+                  name="phone"
+                  placeholder="Phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  aria-label="Phone number"
+                  type="tel"
+                />
+
+                <select
+                  style={{
+                    ...styles.select,
+                    color: isFrequencyPlaceholder ? "#555" : "#030303",
+                  }}
+                  name="frequency"
+                  value={form.frequency}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="" disabled>
+                    How often do you use coworking spaces?*
+                  </option>
+                  <option value="daily">Daily</option>
+                  <option value="few_times_week">A few times a week</option>
+                  <option value="few_times_month">A few times a month</option>
+                  <option value="rarely">
+                    Rarely (special occasions/travel)
+                  </option>
+                  <option value="never">Never (but interested)</option>
+                </select>
+
+                <div style={styles.radioGroup}>
+                  <p
+                    style={{
+                      ...styles.formSubheadline,
+                      marginBottom: "12px",
+                    }}
+                  >
+                    What's MOST important when choosing a coworking space?*
+                  </p>
+                  {[
+                    { value: "price", label: "Price" },
+                    { value: "location", label: "Location/Convenience" },
+                    { value: "community", label: "Community/Events" },
+                    {
+                      value: "amenities",
+                      label: "Amenities (Pool, Cafe, etc.)",
+                    },
+                    { value: "wifi", label: "Wi-Fi Speed/Reliability" },
+                    { value: "other", label: "Other" },
+                  ].map((item) => (
+                    <label key={item.value} style={styles.radioLabel}>
+                      <input
+                        type="radio"
+                        name="important_factor"
+                        value={item.value}
+                        checked={form.important_factor === item.value}
+                        onChange={handleChange}
+                        required
+                        style={styles.radioInput}
+                      />
+                      {item.label}
+                    </label>
+                  ))}
+                </div>
+
+                <textarea
+                  style={styles.textarea}
+                  name="comment"
+                  placeholder="Additional comments (optional)"
+                  value={form.comment}
+                  onChange={handleChange}
+                  aria-label="Additional comments"
+                />
+
+                <button type="submit" style={styles.formButton}>
+                  Notify Me!
+                </button>
+
+                <p style={styles.smallText}>🔒 Your info is safe.</p>
+              </form>
             </div>
-          )}
-        </div>
+
+            <div style={styles.formImageWrapper} className="hide-on-mobile">
+              <img
+                src={defaultImage}
+                alt="Coworking office with people"
+                style={styles.formImage}
+              />
+            </div>
+          </div>
+        )}
       </section>
 
       <Footer />
