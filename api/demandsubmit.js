@@ -24,9 +24,17 @@ export default async function handler(req, res) {
     const db = client.db(dbName);
     const collection = db.collection("demandsubmissions");
 
-    const { name, email, phone, comment } = req.body;
+    const { email, name, phone, frequency, comment, important_factor } =
+      req.body;
 
-    await collection.insertOne({ name, email, phone, comment });
+    await collection.insertOne({
+      email,
+      name,
+      phone,
+      frequency,
+      comment,
+      important_factor,
+    });
 
     return res.status(200).json({ message: "Form submitted!" });
   } catch (err) {

@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import demandSubmitHandler from "./api/demandsubmit.js";
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ mongoose
 
 // The submission logic is now handled by the files in the /api directory.
 // This server.js file can be used for other API routes or removed if not needed.
+
+app.post("/api/demandsubmit", (req, res) => demandSubmitHandler(req, res));
 
 app.get("/", (req, res) => {
   res.send("Server is running.");
