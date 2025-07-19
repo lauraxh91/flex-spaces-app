@@ -349,18 +349,14 @@ const WorkspacesPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const baseUrl =
-        import.meta.env.MODE === "development"
-          ? "/api/demandsubmit"
-          : "https://flex-spaces-app.onrender.com/api/demandsubmit";
-  
-      await axios.post(baseUrl, form);
+      await axios.post('/api/demandsubmit', form); // ✅ this now works on Vercel
       setSubmitted(true);
     } catch (err) {
       console.error("Error submitting form:", err);
       alert("There was an issue submitting the form. Please try again.");
     }
   };
+  
   const coworkingSpaces = [
     {
       id: 1,
