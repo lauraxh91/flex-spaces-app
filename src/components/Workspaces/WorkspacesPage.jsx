@@ -349,11 +349,7 @@ const WorkspacesPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/demandsubmit', form, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      await axios.post("/api/demandsubmit", form);
       setSubmitted(true);
     } catch (err) {
       console.error("Error submitting form:", err);
