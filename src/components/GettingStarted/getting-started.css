@@ -1,0 +1,44 @@
+/* getting-started.css */
+.getting-started-steps {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    text-align: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.getting-started-step {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.getting-started-step h3 {
+    font-size: 20px;
+    margin-top: 12px;
+}
+
+.getting-started-step p {
+    font-size: 16px;
+    margin-top: 8px;
+    color: #444;
+}
+
+/* Global Text Styles */
+.getting-started-section h1,
+.feature-card h1 {
+    font-size: 32px;
+}
+
+.getting-started-section h2,
+.feature-card h2 {
+    font-size: 28px;
+}
+
+.getting-started-section h3,
+.feature-card h3 {
+    font-size: 24px;
+}
