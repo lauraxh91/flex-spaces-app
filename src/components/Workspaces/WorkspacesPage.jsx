@@ -349,8 +349,11 @@ const WorkspacesPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/demandsubmit", form);
-      setSubmitted(true);
+      await axios.post("https://gobook.space/api/demandsubmit", form, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (err) {
       console.error("Error submitting form:", err);
       alert("There was an issue submitting the form. Please try again.");
