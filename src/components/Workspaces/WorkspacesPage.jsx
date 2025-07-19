@@ -349,14 +349,18 @@ const WorkspacesPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/demandsubmit', form); // ✅ this now works on Vercel
+      await axios.post('/api/demandsubmit', form, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       setSubmitted(true);
     } catch (err) {
       console.error("Error submitting form:", err);
       alert("There was an issue submitting the form. Please try again.");
     }
   };
-  
+
   const coworkingSpaces = [
     {
       id: 1,
