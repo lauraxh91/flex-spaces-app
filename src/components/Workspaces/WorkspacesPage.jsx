@@ -112,8 +112,13 @@ const styles = {
   // Demo grid styles (coworking cards)
   demoGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "30px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: "40px",
+    justifyItems: "center",
+    alignItems: "start",
+    width: "100%",
+    maxWidth: "1100px",
+    margin: "0 auto",
   },
   coworkingCard: {
     backgroundColor: "#fff",
@@ -514,66 +519,119 @@ const WorkspacesPage = () => {
 
       {/* App Preview Section */}
       <section style={styles.section}>
-        <div style={styles.sectionContainer}>
-          <h2 style={styles.h2}>App Preview</h2>
+  <div style={styles.sectionContainer}>
+    <h2 style={styles.h2}>App Preview</h2>
+
+    <div style={{ position: "relative" }}>
+      {/* Left Arrow */}
+      <button
+        onClick={() =>
+          document.getElementById("carousel").scrollBy({ left: -300, behavior: "smooth" })
+        }
+        style={{
+          position: "absolute",
+          left: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
+          background: "rgba(255,255,255,0.95)",
+          border: "none",
+          fontSize: "20px",
+          padding: "8px 12px",
+          cursor: "pointer",
+          zIndex: 10,
+          borderRadius: "8px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+        }}
+      >
+        ←
+      </button>
+
+      {/* Carousel */}
+      <div
+        id="carousel"
+        style={{
+          display: "flex",
+          overflowX: "auto",
+          gap: "32px",
+          padding: "16px 32px 24px 32px",
+          scrollSnapType: "x mandatory",
+          WebkitOverflowScrolling: "touch",
+          scrollbarWidth: "none",
+        }}
+      >
+        {[
+          { file: appScreen1, label: "Home Screen" },
+          { file: appScreen3, label: "Search page" },
+          { file: appScreen4, label: "Workspace profile" },
+          { file: appScreen2, label: "Membership page" },
+          { file: appScreen5, label: "Booking confirmation" },
+        ].map((screen, idx) => (
           <div
+            key={idx}
             style={{
+              flex: "0 0 auto",
+              width: "260px",
+              scrollSnapAlign: "center",
+              backgroundColor: "#ffffff",
+              borderRadius: "20px",
+              padding: "16px",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.08)",
               display: "flex",
-              flexWrap: "wrap",
-              gap: "32px",
-              justifyContent: "center",
-              alignItems: "flex-start",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            {[
-              { file: appScreen1, label: "Home Screen" },
-              { file: appScreen2, label: "Membership page" },
-              { file: appScreen3, label: "Search page" },
-              { file: appScreen4, label: "Workspace profile" },
-              { file: appScreen5, label: "Booking confirmation" },
-            ].map((screen, idx) => (
-              <div
-                key={idx}
-                style={{
-                  maxWidth: 300,
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  background: "#fff",
-                  borderRadius: 16,
-                  boxShadow: "0 5px 15px rgba(0,0,0,0.08)",
-                  padding: 16,
-                }}
-              >
-                <img
-                  src={screen.file}
-                  alt={screen.label}
-                  style={{
-                    width: "100%",
-                    maxWidth: 270,
-                    height: "auto",
-                    borderRadius: 12,
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
-                  }}
-                />
-                <div
-                  style={{
-                    marginTop: 12,
-                    fontFamily: "'Lexend Deca', sans-serif",
-                    fontWeight: 600,
-                    fontSize: 18,
-                    textAlign: "center",
-                    color: "#353232",
-                  }}
-                >
-                  {screen.label}
-                </div>
-              </div>
-            ))}
+            <img
+              src={screen.file}
+              alt={screen.label}
+              style={{
+                width: "100%",
+                borderRadius: "12px",
+                objectFit: "contain",
+              }}
+            />
+            <div
+              style={{
+                marginTop: "10px",
+                fontFamily: "'Lexend Deca', sans-serif",
+                fontWeight: 500,
+                fontSize: "14px",
+                textAlign: "center",
+                color: "#333",
+              }}
+            >
+              {screen.label}
+            </div>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+
+      {/* Right Arrow */}
+      <button
+        onClick={() =>
+          document.getElementById("carousel").scrollBy({ left: 300, behavior: "smooth" })
+        }
+        style={{
+          position: "absolute",
+          right: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
+          background: "rgba(255,255,255,0.95)",
+          border: "none",
+          fontSize: "20px",
+          padding: "8px 12px",
+          cursor: "pointer",
+          zIndex: 10,
+          borderRadius: "8px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+        }}
+      >
+        →
+      </button>
+    </div>
+  </div>
+</section>
+
 
       {/* Signup Section - full width background, centered content */}
       <section id="signup" style={styles.signupSection}>
