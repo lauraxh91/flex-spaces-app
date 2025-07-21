@@ -16,7 +16,6 @@ import appScreen5 from "../appScreens/5 - Book & check in.png";
 const styles = {
   // Global styles from index.css
   page: {
-    fontFamily: "'Space Grotesk', sans-serif",
     color: "#3f3d3d",
     backgroundColor: "#ffffff", // Default background
   },
@@ -27,13 +26,11 @@ const styles = {
     padding: "0 24px",
   },
   h1: {
-    fontFamily: "'Lexend Deca', sans-serif",
     fontSize: "32px",
     fontWeight: 700,
     color: "#353232",
   },
   h2: {
-    fontFamily: "'Lexend Deca', sans-serif",
     fontSize: "28px",
     fontWeight: 700,
     color: "#353232",
@@ -41,7 +38,6 @@ const styles = {
     marginBottom: "40px",
   },
   h3: {
-    fontFamily: "'Lexend Deca', sans-serif",
     fontSize: "24px",
     fontWeight: 700,
     color: "#353232",
@@ -55,7 +51,6 @@ const styles = {
     textAlign: "center",
   },
   heroTitle: {
-    fontFamily: "'Lexend Deca', sans-serif",
     fontSize: "3em",
     marginBottom: "15px",
     fontWeight: 700,
@@ -232,7 +227,6 @@ const styles = {
     color: "#030303",
     fontSize: "16px",
     marginBottom: "16px",
-    fontFamily: "'Space Grotesk', sans-serif",
   },
   select: {
     width: "100%",
@@ -243,7 +237,6 @@ const styles = {
     color: "#030303",
     fontSize: "16px",
     marginBottom: "16px",
-    fontFamily: "'Space Grotesk', sans-serif",
     backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width='20'%20height='20'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M5%208l5%205%205-5z'%20fill='%23555'/%3E%3C/svg%3E")`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right 14px center",
@@ -258,7 +251,6 @@ const styles = {
     backgroundColor: "#ffffff",
     color: "#030303",
     fontSize: "16px",
-    fontFamily: "'Space Grotesk', sans-serif",
     marginBottom: "16px",
   },
   formButton: {
@@ -275,7 +267,6 @@ const styles = {
     transition: "background 0.3s ease",
   },
   formHeadline: {
-    fontFamily: "'Lexend Deca', sans-serif",
     fontSize: "24px",
     fontWeight: "700",
     marginBottom: "12px",
@@ -485,37 +476,103 @@ const WorkspacesPage = () => {
       </header>
 
       {/* How It Works Section */}
-      <section style={styles.section}>
-        <div style={styles.sectionContainer}>
-          <h2 style={styles.h2}>How It Works</h2>
-          <div style={styles.howItWorksSteps}>
-            <div style={styles.step}>
-              <div style={styles.stepIcon}>📍</div>
-              <h3 style={styles.h3}>1. Discover</h3>
-              <p>
-                Browse a curated selection of coworking spaces wherever your
-                journey takes you.
-              </p>
-            </div>
-            <div style={styles.step}>
-              <div style={styles.stepIcon}>🖱️</div>
-              <h3 style={styles.h3}>2. Book</h3>
-              <p>
-                Choose your space, pick a date, and confirm your booking with
-                lightning-fast checkout.
-              </p>
-            </div>
-            <div style={styles.step}>
-              <div style={styles.stepIcon}>💻</div>
-              <h3 style={styles.h3}>3. Work</h3>
-              <p>
-                Show up, connect, and enjoy a productive day in a vibrant
-                workspace environment.
-              </p>
-            </div>
+      <section
+  style={{
+    padding: "60px 0",
+    backgroundColor: "#202223",
+    color: "#ffffff",
+    textAlign: "center",
+  }}
+>
+  <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+    <h2
+      style={{
+        fontSize: "32px",
+        fontWeight: 700,
+        marginBottom: "48px",
+        color: "#cccccc",
+      }}
+    >
+      How It Works
+    </h2>
+
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        gap: "40px",
+      }}
+    >
+      {[
+        {
+          icon: "📍",
+          title: "Discover",
+          desc:
+            "Browse a curated selection of coworking spaces wherever your journey takes you.",
+        },
+        {
+          icon: "🖱️",
+          title: "Book",
+          desc:
+            "Choose your space, pick a date, and confirm your booking with lightning-fast checkout.",
+        },
+        {
+          icon: "💻",
+          title: "Work",
+          desc:
+            "Show up, connect, and enjoy a productive day in a vibrant workspace environment.",
+        },
+      ].map((step, idx) => (
+        <div
+          key={idx}
+          style={{
+            flex: "1 1 280px",
+            maxWidth: "300px",
+            minWidth: "240px",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#2C2E2F",
+              borderRadius: "50%",
+              width: "64px",
+              height: "64px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "32px",
+              margin: "0 auto 20px auto",
+            }}
+          >
+            {step.icon}
           </div>
+          <h3
+            style={{
+              fontSize: "20px",
+              fontWeight: "700",
+              marginBottom: "12px",
+              color: "#cccccc",
+            }}
+          >
+            {idx + 1}. {step.title}
+          </h3>
+          <p
+            style={{
+              fontSize: "16px",
+              color: "#cccccc",
+              lineHeight: "1.6",
+            }}
+          >
+            {step.desc}
+          </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
       {/* App Preview Section */}
       <section style={styles.section}>
@@ -593,7 +650,6 @@ const WorkspacesPage = () => {
             <div
               style={{
                 marginTop: "10px",
-                fontFamily: "'Lexend Deca', sans-serif",
                 fontWeight: 500,
                 fontSize: "14px",
                 textAlign: "center",
