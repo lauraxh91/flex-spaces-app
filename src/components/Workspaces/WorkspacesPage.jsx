@@ -100,8 +100,6 @@ const styles = {
   },
   stepIcon: {
     fontSize: "3em",
-    color: "#00C291", // Using primary green
-    marginBottom: "15px",
   },
 
   // Demo grid styles (coworking cards)
@@ -459,28 +457,82 @@ const WorkspacesPage = () => {
       <HeaderText text="BookSpace" />
 
       {/* Hero Section */}
-      <header style={styles.hero}>
-        <div style={styles.sectionContainer}>
-          <h1 style={styles.heroTitle}>
-            Find Your Perfect Workspace, Instantly.
-          </h1>
-          <p style={styles.heroSubtitle}>
-            Unlock access to inspiring coworking spaces across the globe with
-            one simple pass. Discover unique spots and book your desk in
-            seconds.
-          </p>
-          <button onClick={scrollToSignup} style={styles.ctaButton}>
-            Get Early Access & Updates
-          </button>
-        </div>
-      </header>
-
-      {/* How It Works Section */}
-      <section
+      <header
   style={{
-    padding: "60px 0",
     backgroundColor: "#202223",
     color: "#ffffff",
+    padding: "80px 5%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: "48px",
+  }}
+>
+  {/* Text Section */}
+  <div style={{ flex: "1 1 500px", maxWidth: "600px" }}>
+    <h1 style={{ fontSize: "3.2em", fontWeight: "700", lineHeight: "1.2" }}>
+    <span style={{ color: "#ffffff" }}>Find Your </span>  <span style={{ color: "#00C291" }}>Perfect Workspace</span><br />
+    <span style={{ color: "#ffffff" }}>Instantly.</span>
+    </h1>
+    <p style={{ fontSize: "1.1em", color: "#cccccc", marginTop: "16px", lineHeight: "1.6" }}>
+      Unlock inspiring coworking spaces around the world with one smart pass.
+      Discover, book, and get working in seconds.
+    </p>
+    <button
+      onClick={scrollToSignup}
+      style={{
+        marginTop: "32px",
+        backgroundColor: "#00C291",
+        color: "#fff",
+        padding: "14px 28px",
+        fontSize: "1em",
+        fontWeight: "600",
+        borderRadius: "10px",
+        border: "none",
+        cursor: "pointer",
+        transition: "background-color 0.3s ease",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#00a97f")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#00C291")}
+    >
+      Get Early Access & Updates
+    </button>
+  </div>
+
+  {/* Image Section */}
+  <div
+    className="hide-on-mobile"
+    style={{
+      flex: "1 1 400px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <img
+      src={appScreen3}
+      alt="BookSpace App Preview"
+      id="app-preview"
+      style={{
+        width: "100%",
+        maxWidth: "300px",
+        borderRadius: "24px",
+        boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)",
+      }}
+    />
+  </div>
+</header>
+
+
+
+
+      {/* How It Works Section */}
+      <section id="how-it-works"
+  style={{
+    padding: "60px 0",
+    backgroundColor: "#ffffff",
+    color: "black",
     textAlign: "center",
   }}
 >
@@ -490,7 +542,6 @@ const WorkspacesPage = () => {
         fontSize: "32px",
         fontWeight: 700,
         marginBottom: "48px",
-        color: "#cccccc",
       }}
     >
       How It Works
@@ -534,7 +585,7 @@ const WorkspacesPage = () => {
         >
           <div
             style={{
-              backgroundColor: "#2C2E2F",
+              backgroundColor: "#ffffff",
               borderRadius: "50%",
               width: "64px",
               height: "64px",
@@ -552,7 +603,7 @@ const WorkspacesPage = () => {
               fontSize: "20px",
               fontWeight: "700",
               marginBottom: "12px",
-              color: "#cccccc",
+          
             }}
           >
             {idx + 1}. {step.title}
@@ -560,7 +611,7 @@ const WorkspacesPage = () => {
           <p
             style={{
               fontSize: "16px",
-              color: "#cccccc",
+    
               lineHeight: "1.6",
             }}
           >
@@ -618,10 +669,10 @@ const WorkspacesPage = () => {
       >
         {[
           { file: appScreen1, label: "Home Screen" },
-          { file: appScreen3, label: "Search page" },
           { file: appScreen4, label: "Workspace profile" },
           { file: appScreen2, label: "Membership page" },
           { file: appScreen5, label: "Booking confirmation" },
+          { file: appScreen3, label: "Search page" },
         ].map((screen, idx) => (
           <div
             key={idx}
@@ -718,7 +769,7 @@ const WorkspacesPage = () => {
         ) : (
           <div style={styles.signupWrapper}>
             <div style={styles.signupCard}>
- <form onSubmit={handleSubmit}>
+ <form id="contact" onSubmit={handleSubmit}>
   <div style={styles.formHeadline}>Be the First to Know!</div>
   <p style={{ ...styles.formSubheadline, marginBottom: "20px" }}>
     Get notified when we launch and access early bird perks.
