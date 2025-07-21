@@ -596,115 +596,100 @@ const WorkspacesPage = () => {
         ) : (
           <div style={styles.signupWrapper}>
             <div style={styles.signupCard}>
-              <form onSubmit={handleSubmit}>
-                <div style={styles.formHeadline}>Be the First to Know!</div>
-                <p style={styles.formSubheadline}>
-                  Sign up to get notified when we launch and receive early bird
-                  offers.
-                </p>
+ <form onSubmit={handleSubmit}>
+  <div style={styles.formHeadline}>Be the First to Know!</div>
+  <p style={{ ...styles.formSubheadline, marginBottom: "20px" }}>
+    Get notified when we launch and access early bird perks.
+  </p>
 
-                <input
-                  style={styles.input}
-                  name="email"
-                  type="email"
-                  placeholder="Email*"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  aria-label="Email address"
-                />
+  <div
+    style={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "12px",
+      justifyContent: "space-between",
+    }}
+  >
+    <input
+      style={{ ...styles.input, flex: "1 1 100%" }}
+      name="email"
+      type="email"
+      placeholder="Email*"
+      value={form.email}
+      onChange={handleChange}
+      required
+    />
 
-                <input
-                  style={styles.input}
-                  name="name"
-                  placeholder="Full name"
-                  value={form.name}
-                  onChange={handleChange}
-                  aria-label="Full name"
-                />
+    <input
+      style={{ ...styles.input, flex: "1 1 48%" }}
+      name="name"
+      placeholder="Full name"
+      value={form.name}
+      onChange={handleChange}
+    />
 
-                <input
-                  style={styles.input}
-                  name="phone"
-                  placeholder="Phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  aria-label="Phone number"
-                  type="tel"
-                />
+    <input
+      style={{ ...styles.input, flex: "1 1 48%" }}
+      name="phone"
+      placeholder="Phone"
+      value={form.phone}
+      onChange={handleChange}
+      type="tel"
+    />
+  </div>
 
-                <select
-                  style={{
-                    ...styles.select,
-                    color: isFrequencyPlaceholder ? "#555" : "#030303",
-                  }}
-                  name="frequency"
-                  value={form.frequency}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="" disabled>
-                    How often do you use coworking spaces?*
-                  </option>
-                  <option value="daily">Daily</option>
-                  <option value="few_times_week">A few times a week</option>
-                  <option value="few_times_month">A few times a month</option>
-                  <option value="rarely">
-                    Rarely (special occasions/travel)
-                  </option>
-                  <option value="never">Never (but interested)</option>
-                </select>
+  <select
+    style={{
+      ...styles.select,
+      marginTop: "12px",
+      color: isFrequencyPlaceholder ? "#555" : "#030303",
+    }}
+    name="frequency"
+    value={form.frequency}
+    onChange={handleChange}
+  >
+    <option value="" disabled>
+      How often do you use coworking spaces?
+    </option>
+    <option value="daily">Daily</option>
+    <option value="few_times_week">A few times a week</option>
+    <option value="few_times_month">A few times a month</option>
+    <option value="rarely">Rarely (travel only)</option>
+    <option value="never">Never (but curious)</option>
+  </select>
 
-                <div style={styles.radioGroup}>
-                  <p
-                    style={{
-                      ...styles.formSubheadline,
-                      marginBottom: "12px",
-                    }}
-                  >
-                    What's MOST important when choosing a coworking space?*
-                  </p>
-                  {[
-                    { value: "price", label: "Price" },
-                    { value: "location", label: "Location/Convenience" },
-                    { value: "community", label: "Community/Events" },
-                    {
-                      value: "amenities",
-                      label: "Amenities (Pool, Cafe, etc.)",
-                    },
-                    { value: "wifi", label: "Wi-Fi Speed/Reliability" },
-                    { value: "other", label: "Other" },
-                  ].map((item) => (
-                    <label key={item.value} style={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        name="important_factor"
-                        value={item.value}
-                        checked={form.important_factor === item.value}
-                        onChange={handleChange}
-                        required
-                        style={styles.radioInput}
-                      />
-                      {item.label}
-                    </label>
-                  ))}
-                </div>
+  <select
+    style={styles.select}
+    name="important_factor"
+    value={form.important_factor}
+    onChange={handleChange}
+  >
+    <option value="" disabled>
+      What matters most in a workspace?
+    </option>
+    <option value="price">Price</option>
+    <option value="location">Location</option>
+    <option value="community">Community & Events</option>
+    <option value="amenities">Amenities (Pool, Cafe, etc.)</option>
+    <option value="wifi">Wi-Fi Reliability</option>
+    <option value="other">Other</option>
+  </select>
 
-                <textarea
-                  style={styles.textarea}
-                  name="comment"
-                  placeholder="Additional comments (optional)"
-                  value={form.comment}
-                  onChange={handleChange}
-                  aria-label="Additional comments"
-                />
+  <textarea
+    style={styles.textarea}
+    name="comment"
+    placeholder="Any thoughts or suggestions? (optional)"
+    value={form.comment}
+    onChange={handleChange}
+  />
 
-                <button type="submit" style={styles.formButton}>
-                  Notify Me!
-                </button>
+  <button type="submit" style={{ ...styles.formButton, marginTop: "8px" }}>
+    Notify Me
+  </button>
+  <p style={styles.smallText}>🔒 We respect your privacy.</p>
+</form>
 
-                <p style={styles.smallText}>🔒 Your info is safe.</p>
-              </form>
+
             </div>
 
             <div style={styles.formImageWrapper} className="hide-on-mobile">
