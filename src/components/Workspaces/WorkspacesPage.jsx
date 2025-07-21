@@ -821,7 +821,7 @@ const WorkspacesPage = () => {
     onChange={handleChange}
   >
     <option value="" disabled>
-      How often do you use coworking spaces?
+    Coworking Frequency
     </option>
     <option value="daily">Daily</option>
     <option value="few_times_week">A few times a week</option>
@@ -837,7 +837,7 @@ const WorkspacesPage = () => {
     onChange={handleChange}
   >
     <option value="" disabled>
-      What matters most in a workspace?
+    What Matters Most?
     </option>
     <option value="price">Price</option>
     <option value="location">Location</option>
@@ -850,7 +850,7 @@ const WorkspacesPage = () => {
   <textarea
     style={styles.textarea}
     name="comment"
-    placeholder="Any thoughts or suggestions? (optional)"
+    placeholder="Any thoughts or suggestions?"
     value={form.comment}
     onChange={handleChange}
   />
