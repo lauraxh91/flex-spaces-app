@@ -496,7 +496,7 @@ const WorkspacesPage = () => {
       onMouseOver={(e) => (e.target.style.backgroundColor = "#00a97f")}
       onMouseOut={(e) => (e.target.style.backgroundColor = "#00C291")}
     >
-      Get Early Access & Updates
+      Get Early Access 
     </button>
   </div>
 
@@ -756,14 +756,13 @@ const WorkspacesPage = () => {
                 maxWidth: "600px",
                 textAlign: "center",
                 padding: "80px 20px",
-                color: "#00C291",
                 fontSize: "20px",
                 fontWeight: "600",
               }}
             >
-              Thank you!
+              Thanks for joining us! 🙌
               <br />
-              We'll notify you upon launch.
+              You’ll be the first to know when we launch.
             </div>
           </div>
         ) : (
