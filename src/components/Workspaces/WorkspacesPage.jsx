@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Menu, X } from "lucide-react";
-import defaultImage from "../../assets/3.webp";
+import defaultImage from "../../assets/6.jpg";
 
 // Re-using the HeaderText component for a consistent header
 import HeaderText from "../Header/HeaderText";
@@ -174,41 +174,49 @@ const styles = {
     // The padding is now handled by the wrapper inside
   },
   signupWrapper: {
-    maxWidth: "1100px",
+    maxWidth: "1200px",
     margin: "0 auto",
-    padding: "30px 20px", // Exact padding match with ContactForm
+    padding: "24px",
     display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexWrap: "nowrap",        // <<< key to keeping them next to each other
     gap: "40px",
-    alignItems: "stretch",
-    justifyContent: "center",
+    alignItems: "center",      // center vertically
+    justifyContent: "space-between",
   },
+  
   signupCard: {
-    flex: "1 1 48%",
+    flex: "1 1 50%",
     minWidth: "320px",
-    maxWidth: "600px",
+    maxWidth: "500px",
     backgroundColor: "#2C2E2F",
     borderRadius: "16px",
-    padding: "32px",
-    boxShadow: "0 0 20px rgba(0,0,0,0.3)",
+    padding: "24px",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
   },
+  
   formImageWrapper: {
-    flex: "1 1 48%",
+    flex: "1 1 50%",           // slightly more width than the form
     minWidth: "320px",
-    maxWidth: "600px",
-    borderRadius: "16px",
-    overflow: "hidden",
-    height: "100%", // Added missing height to ensure equal column size
-  },
-  formImage: {
-    width: "100%",
+    maxWidth: "600px",         // wider on large screens
     height: "100%",
-    objectFit: "cover",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    padding: "0",              // no internal padding needed for image
   },
+  
+  formImage: {
+  width: "100%",
+  height: "auto",
+  objectFit: "cover",
+  borderRadius: "16px",  // ✨ just enough to soften edges
+  maxHeight: "500px",
+  boxShadow: "0 6px 18px rgba(0,0,0,0.1)", // ✨ soft, natural lift
+},
   input: {
     width: "100%",
     height: "44px",
