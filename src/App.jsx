@@ -12,8 +12,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} /> {/* Add the /test route */}
-        <Route path="/workspaces" element={<WorkspacesPage />} />
+        <Route path="/for-owners" element={<HomePage />} /> {/* Add the /test route */}
+        <Route path="/" element={<WorkspacesPage />} />
       </Routes>
     </Router>
   );
