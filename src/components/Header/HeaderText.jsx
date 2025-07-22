@@ -103,7 +103,7 @@ const HeaderText = ({ text = 'BookSpace' }) => {
         <nav style={navStyle}>
           <a href="#how-it-works" style={linkStyle}>How It Works</a>
           <a href="#carousel" style={linkStyle}>App Preview</a>
-          <a href="#contact" style={linkStyle}>Sign Up</a>
+          <a href="#contact" style={linkStyle}>Early Access</a>
         </nav>
       ) : (
         <>
