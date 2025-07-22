@@ -814,7 +814,7 @@ const WorkspacesPage = () => {
     style={{
       ...styles.select,
       marginTop: "12px",
-      color: isFrequencyPlaceholder ? "#555" : "#030303",
+      color: form.frequency === "" ? "#555" : "#030303",
     }}
     name="frequency"
     value={form.frequency}
@@ -831,12 +831,15 @@ const WorkspacesPage = () => {
   </select>
 
   <select
-    style={styles.select}
+    style={{
+      ...styles.select,
+      color: form.important_factor === "" ? "#555" : "#030303",
+    }}
     name="important_factor"
     value={form.important_factor}
     onChange={handleChange}
   >
-    <option value="" disabled>
+    <option value=""  disabled>
     What Matters Most?
     </option>
     <option value="price">Price</option>
