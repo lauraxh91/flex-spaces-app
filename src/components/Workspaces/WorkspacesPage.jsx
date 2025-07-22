@@ -669,10 +669,11 @@ const WorkspacesPage = () => {
       >
         {[
           { file: appScreen1, label: "Home Screen" },
+          { file: appScreen3, label: "Search page" },
           { file: appScreen4, label: "Workspace profile" },
           { file: appScreen2, label: "Membership page" },
           { file: appScreen5, label: "Booking confirmation" },
-          { file: appScreen3, label: "Search page" },
+         
         ].map((screen, idx) => (
           <div
             key={idx}
