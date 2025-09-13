@@ -176,12 +176,12 @@ const styles = {
     margin: "0 auto",
     padding: "24px",
     display: "flex",
-    flexWrap: "nowrap",        // <<< key to keeping them next to each other
+    flexWrap: "nowrap", // <<< key to keeping them next to each other
     gap: "40px",
-    alignItems: "center",      // center vertically
+    alignItems: "center", // center vertically
     justifyContent: "space-between",
   },
-  
+
   signupCard: {
     flex: "1 1 50%",
     minWidth: "320px",
@@ -194,27 +194,27 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
   },
-  
+
   formImageWrapper: {
-    flex: "1 1 50%",           // slightly more width than the form
+    flex: "1 1 50%", // slightly more width than the form
     minWidth: "320px",
-    maxWidth: "600px",         // wider on large screens
+    maxWidth: "600px", // wider on large screens
     height: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    padding: "0",              // no internal padding needed for image
+    padding: "0", // no internal padding needed for image
   },
-  
+
   formImage: {
-  width: "100%",
-  height: "auto",
-  objectFit: "cover",
-  borderRadius: "16px",  // ✨ just enough to soften edges
-  maxHeight: "500px",
-  boxShadow: "0 6px 18px rgba(0,0,0,0.1)", // ✨ soft, natural lift
-},
+    width: "100%",
+    height: "auto",
+    objectFit: "cover",
+    borderRadius: "16px", // ✨ just enough to soften edges
+    maxHeight: "500px",
+    boxShadow: "0 6px 18px rgba(0,0,0,0.1)", // ✨ soft, natural lift
+  },
   input: {
     width: "100%",
     height: "44px",
@@ -323,8 +323,24 @@ const WorkspacesPage = () => {
     comment: "",
     frequency: "",
     important_factor: "",
+    tracking_code: "", // Add tracking code field
   });
   const [submitted, setSubmitted] = useState(false);
+
+  // Function to get URL parameters
+  const getUrlParameter = (name) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  };
+
+  // Function to validate tracking code format
+  const validateTrackingCode = (code) => {
+    if (!code) return null;
+
+    // Check if it's a valid 16-character hex string
+    const isValid = /^[A-F0-9]{16}$/.test(code.toUpperCase());
+    return isValid ? code.toUpperCase() : null;
+  };
 
   useEffect(() => {
     // Prevent scroll restoration
@@ -333,6 +349,29 @@ const WorkspacesPage = () => {
     }
     // Scroll to top
     window.scrollTo(0, 0);
+
+    // Capture tracking code from URL parameter 'ref'
+    const trackingParam = getUrlParameter("ref");
+    const validatedTrackingCode = validateTrackingCode(trackingParam);
+
+    if (validatedTrackingCode) {
+      setForm((prevForm) => ({
+        ...prevForm,
+        tracking_code: validatedTrackingCode,
+      }));
+
+      // Store in localStorage for persistence
+      localStorage.setItem("flexSpacesTrackingCode", validatedTrackingCode);
+    } else {
+      // Check localStorage as fallback
+      const storedCode = localStorage.getItem("flexSpacesTrackingCode");
+      if (storedCode && validateTrackingCode(storedCode)) {
+        setForm((prevForm) => ({
+          ...prevForm,
+          tracking_code: storedCode,
+        }));
+      }
+    }
 
     // Add responsive styles
     const styleTag = document.createElement("style");
@@ -458,288 +497,295 @@ const WorkspacesPage = () => {
 
       {/* Hero Section */}
       <header
-  style={{
-    backgroundColor: "#202223",
-    color: "#ffffff",
-    padding: "80px 5%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    gap: "48px",
-  }}
->
-  {/* Text Section */}
-  <div style={{ flex: "1 1 500px", maxWidth: "600px" }}>
-    <h1 style={{ fontSize: "3.2em", fontWeight: "700", lineHeight: "1.2" }}>
-    <span style={{ color: "#ffffff" }}>Find Your </span>  <span style={{ color: "#00C291" }}>Perfect Workspace</span><br />
-    <span style={{ color: "#ffffff" }}>Instantly.</span>
-    </h1>
-    <p style={{ fontSize: "1.1em", color: "#cccccc", marginTop: "16px", lineHeight: "1.6" }}>
-      Unlock inspiring coworking spaces around the world with one smart pass.
-      Discover, book, and get working in seconds.
-    </p>
-    <button
-      onClick={scrollToSignup}
-      style={{
-        marginTop: "32px",
-        backgroundColor: "#00C291",
-        color: "#fff",
-        padding: "14px 28px",
-        fontSize: "1em",
-        fontWeight: "600",
-        borderRadius: "10px",
-        border: "none",
-        cursor: "pointer",
-        transition: "background-color 0.3s ease",
-      }}
-      onMouseOver={(e) => (e.target.style.backgroundColor = "#00a97f")}
-      onMouseOut={(e) => (e.target.style.backgroundColor = "#00C291")}
-    >
-      Get Early Access 
-    </button>
-  </div>
-
-  {/* Image Section */}
-  <div
-    className="hide-on-mobile"
-    style={{
-      flex: "1 1 400px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}
-  >
-    <img
-      src={appScreen3}
-      alt="BookSpace App Preview"
-      id="app-preview"
-      style={{
-        width: "100%",
-        maxWidth: "300px",
-        borderRadius: "24px",
-        boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)",
-      }}
-    />
-  </div>
-</header>
-
-
-
-
-      {/* How It Works Section */}
-      <section id="how-it-works"
-  style={{
-    padding: "60px 0",
-    backgroundColor: "#ffffff",
-    color: "black",
-    textAlign: "center",
-  }}
->
-  <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
-    <h2
-      style={{
-        fontSize: "32px",
-        fontWeight: 700,
-        marginBottom: "48px",
-      }}
-    >
-      How It Works
-    </h2>
-
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-around",
-        gap: "40px",
-      }}
-    >
-      {[
-        {
-          icon: "📍",
-          title: "Discover",
-          desc:
-            "Browse a curated selection of coworking spaces wherever your journey takes you.",
-        },
-        {
-          icon: "🖱️",
-          title: "Book",
-          desc:
-            "Choose your space, pick a date, and confirm your booking with lightning-fast checkout.",
-        },
-        {
-          icon: "💻",
-          title: "Work",
-          desc:
-            "Show up, connect, and enjoy a productive day in a vibrant workspace environment.",
-        },
-      ].map((step, idx) => (
-        <div
-          key={idx}
-          style={{
-            flex: "1 1 280px",
-            maxWidth: "300px",
-            minWidth: "240px",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              borderRadius: "50%",
-              width: "64px",
-              height: "64px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "32px",
-              margin: "0 auto 20px auto",
-            }}
+        style={{
+          backgroundColor: "#202223",
+          color: "#ffffff",
+          padding: "80px 5%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "48px",
+        }}
+      >
+        {/* Text Section */}
+        <div style={{ flex: "1 1 500px", maxWidth: "600px" }}>
+          <h1
+            style={{ fontSize: "3.2em", fontWeight: "700", lineHeight: "1.2" }}
           >
-            {step.icon}
-          </div>
-          <h3
-            style={{
-              fontSize: "20px",
-              fontWeight: "700",
-              marginBottom: "12px",
-          
-            }}
-          >
-            {idx + 1}. {step.title}
-          </h3>
+            <span style={{ color: "#ffffff" }}>Find Your </span>{" "}
+            <span style={{ color: "#00C291" }}>Perfect Workspace</span>
+            <br />
+            <span style={{ color: "#ffffff" }}>Instantly.</span>
+          </h1>
           <p
             style={{
-              fontSize: "16px",
-    
+              fontSize: "1.1em",
+              color: "#cccccc",
+              marginTop: "16px",
               lineHeight: "1.6",
             }}
           >
-            {step.desc}
+            Unlock inspiring coworking spaces around the world with one smart
+            pass. Discover, book, and get working in seconds.
           </p>
+          <button
+            onClick={scrollToSignup}
+            style={{
+              marginTop: "32px",
+              backgroundColor: "#00C291",
+              color: "#fff",
+              padding: "14px 28px",
+              fontSize: "1em",
+              fontWeight: "600",
+              borderRadius: "10px",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 0.3s ease",
+            }}
+            onMouseOver={(e) => (e.target.style.backgroundColor = "#00a97f")}
+            onMouseOut={(e) => (e.target.style.backgroundColor = "#00C291")}
+          >
+            Get Early Access
+          </button>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
 
+        {/* Image Section */}
+        <div
+          className="hide-on-mobile"
+          style={{
+            flex: "1 1 400px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src={appScreen3}
+            alt="BookSpace App Preview"
+            id="app-preview"
+            style={{
+              width: "100%",
+              maxWidth: "300px",
+              borderRadius: "24px",
+              boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)",
+            }}
+          />
+        </div>
+      </header>
 
+      {/* How It Works Section */}
+      <section
+        id="how-it-works"
+        style={{
+          padding: "60px 0",
+          backgroundColor: "#ffffff",
+          color: "black",
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}
+        >
+          <h2
+            style={{
+              fontSize: "32px",
+              fontWeight: 700,
+              marginBottom: "48px",
+            }}
+          >
+            How It Works
+          </h2>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+              gap: "40px",
+            }}
+          >
+            {[
+              {
+                icon: "📍",
+                title: "Discover",
+                desc: "Browse a curated selection of coworking spaces wherever your journey takes you.",
+              },
+              {
+                icon: "🖱️",
+                title: "Book",
+                desc: "Choose your space, pick a date, and confirm your booking with lightning-fast checkout.",
+              },
+              {
+                icon: "💻",
+                title: "Work",
+                desc: "Show up, connect, and enjoy a productive day in a vibrant workspace environment.",
+              },
+            ].map((step, idx) => (
+              <div
+                key={idx}
+                style={{
+                  flex: "1 1 280px",
+                  maxWidth: "300px",
+                  minWidth: "240px",
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "50%",
+                    width: "64px",
+                    height: "64px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "32px",
+                    margin: "0 auto 20px auto",
+                  }}
+                >
+                  {step.icon}
+                </div>
+                <h3
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "700",
+                    marginBottom: "12px",
+                  }}
+                >
+                  {idx + 1}. {step.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "16px",
+
+                    lineHeight: "1.6",
+                  }}
+                >
+                  {step.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* App Preview Section */}
       <section style={styles.section}>
-  <div style={styles.sectionContainer}>
-    <h2 style={styles.h2}>App Preview</h2>
+        <div style={styles.sectionContainer}>
+          <h2 style={styles.h2}>App Preview</h2>
 
-    <div style={{ position: "relative" }}>
-      {/* Left Arrow */}
-      <button
-        onClick={() =>
-          document.getElementById("carousel").scrollBy({ left: -300, behavior: "smooth" })
-        }
-        style={{
-          position: "absolute",
-          left: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          background: "rgba(255,255,255,0.95)",
-          border: "none",
-          fontSize: "20px",
-          padding: "8px 12px",
-          cursor: "pointer",
-          zIndex: 10,
-          borderRadius: "8px",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-        }}
-      >
-        ←
-      </button>
-
-      {/* Carousel */}
-      <div
-        id="carousel"
-        style={{
-          display: "flex",
-          overflowX: "auto",
-          gap: "32px",
-          padding: "16px 32px 24px 32px",
-          scrollSnapType: "x mandatory",
-          WebkitOverflowScrolling: "touch",
-          scrollbarWidth: "none",
-        }}
-      >
-        {[
-          { file: appScreen1, label: "Home Screen" },
-          { file: appScreen3, label: "Search page" },
-          { file: appScreen4, label: "Workspace profile" },
-          { file: appScreen2, label: "Membership page" },
-          { file: appScreen5, label: "Booking confirmation" },
-         
-        ].map((screen, idx) => (
-          <div
-            key={idx}
-            style={{
-              flex: "0 0 auto",
-              width: "260px",
-              scrollSnapAlign: "center",
-              backgroundColor: "#ffffff",
-              borderRadius: "20px",
-              padding: "16px",
-              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.08)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <img
-              src={screen.file}
-              alt={screen.label}
+          <div style={{ position: "relative" }}>
+            {/* Left Arrow */}
+            <button
+              onClick={() =>
+                document
+                  .getElementById("carousel")
+                  .scrollBy({ left: -300, behavior: "smooth" })
+              }
               style={{
-                width: "100%",
-                borderRadius: "12px",
-                objectFit: "contain",
-              }}
-            />
-            <div
-              style={{
-                marginTop: "10px",
-                fontWeight: 500,
-                fontSize: "14px",
-                textAlign: "center",
-                color: "#333",
+                position: "absolute",
+                left: 0,
+                top: "50%",
+                transform: "translateY(-50%)",
+                background: "rgba(255,255,255,0.95)",
+                border: "none",
+                fontSize: "20px",
+                padding: "8px 12px",
+                cursor: "pointer",
+                zIndex: 10,
+                borderRadius: "8px",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
               }}
             >
-              {screen.label}
+              ←
+            </button>
+
+            {/* Carousel */}
+            <div
+              id="carousel"
+              style={{
+                display: "flex",
+                overflowX: "auto",
+                gap: "32px",
+                padding: "16px 32px 24px 32px",
+                scrollSnapType: "x mandatory",
+                WebkitOverflowScrolling: "touch",
+                scrollbarWidth: "none",
+              }}
+            >
+              {[
+                { file: appScreen1, label: "Home Screen" },
+                { file: appScreen3, label: "Search page" },
+                { file: appScreen4, label: "Workspace profile" },
+                { file: appScreen2, label: "Membership page" },
+                { file: appScreen5, label: "Booking confirmation" },
+              ].map((screen, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    flex: "0 0 auto",
+                    width: "260px",
+                    scrollSnapAlign: "center",
+                    backgroundColor: "#ffffff",
+                    borderRadius: "20px",
+                    padding: "16px",
+                    boxShadow: "0 6px 18px rgba(0, 0, 0, 0.08)",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={screen.file}
+                    alt={screen.label}
+                    style={{
+                      width: "100%",
+                      borderRadius: "12px",
+                      objectFit: "contain",
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginTop: "10px",
+                      fontWeight: 500,
+                      fontSize: "14px",
+                      textAlign: "center",
+                      color: "#333",
+                    }}
+                  >
+                    {screen.label}
+                  </div>
+                </div>
+              ))}
             </div>
+
+            {/* Right Arrow */}
+            <button
+              onClick={() =>
+                document
+                  .getElementById("carousel")
+                  .scrollBy({ left: 300, behavior: "smooth" })
+              }
+              style={{
+                position: "absolute",
+                right: 0,
+                top: "50%",
+                transform: "translateY(-50%)",
+                background: "rgba(255,255,255,0.95)",
+                border: "none",
+                fontSize: "20px",
+                padding: "8px 12px",
+                cursor: "pointer",
+                zIndex: 10,
+                borderRadius: "8px",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+              }}
+            >
+              →
+            </button>
           </div>
-        ))}
-      </div>
-
-      {/* Right Arrow */}
-      <button
-        onClick={() =>
-          document.getElementById("carousel").scrollBy({ left: 300, behavior: "smooth" })
-        }
-        style={{
-          position: "absolute",
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          background: "rgba(255,255,255,0.95)",
-          border: "none",
-          fontSize: "20px",
-          padding: "8px 12px",
-          cursor: "pointer",
-          zIndex: 10,
-          borderRadius: "8px",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-        }}
-      >
-        →
-      </button>
-    </div>
-  </div>
-</section>
-
+        </div>
+      </section>
 
       {/* Signup Section - full width background, centered content */}
       <section id="signup" style={styles.signupSection}>
@@ -769,103 +815,106 @@ const WorkspacesPage = () => {
         ) : (
           <div style={styles.signupWrapper}>
             <div style={styles.signupCard}>
- <form id="contact" onSubmit={handleSubmit}>
-  <div style={styles.formHeadline}>Be the First to Know!</div>
-  <p style={{ ...styles.formSubheadline, marginBottom: "20px" }}>
-    Get notified when we launch and access early bird perks.
-  </p>
+              <form id="contact" onSubmit={handleSubmit}>
+                <div style={styles.formHeadline}>Be the First to Know!</div>
+                <p style={{ ...styles.formSubheadline, marginBottom: "20px" }}>
+                  Get notified when we launch and access early bird perks.
+                </p>
 
-  <div
-    style={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: "12px",
-      justifyContent: "space-between",
-    }}
-  >
-    <input
-      style={{ ...styles.input, flex: "1 1 100%" }}
-      name="email"
-      type="email"
-      placeholder="Email*"
-      value={form.email}
-      onChange={handleChange}
-      required
-    />
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "12px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <input
+                    style={{ ...styles.input, flex: "1 1 100%" }}
+                    name="email"
+                    type="email"
+                    placeholder="Email*"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                  />
 
-    <input
-      style={{ ...styles.input, flex: "1 1 48%" }}
-      name="name"
-      placeholder="Full name"
-      value={form.name}
-      onChange={handleChange}
-    />
+                  <input
+                    style={{ ...styles.input, flex: "1 1 48%" }}
+                    name="name"
+                    placeholder="Full name"
+                    value={form.name}
+                    onChange={handleChange}
+                  />
 
-    <input
-      style={{ ...styles.input, flex: "1 1 48%" }}
-      name="phone"
-      placeholder="Phone"
-      value={form.phone}
-      onChange={handleChange}
-      type="tel"
-    />
-  </div>
+                  <input
+                    style={{ ...styles.input, flex: "1 1 48%" }}
+                    name="phone"
+                    placeholder="Phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    type="tel"
+                  />
+                </div>
 
-  <select
-    style={{
-      ...styles.select,
-      marginTop: "12px",
-      color: form.frequency === "" ? "#555" : "#030303",
-    }}
-    name="frequency"
-    value={form.frequency}
-    onChange={handleChange}
-  >
-    <option value="" disabled>
-    Coworking Frequency
-    </option>
-    <option value="daily">Daily</option>
-    <option value="few_times_week">A few times a week</option>
-    <option value="few_times_month">A few times a month</option>
-    <option value="rarely">Rarely (travel only)</option>
-    <option value="never">Never (but curious)</option>
-  </select>
+                <select
+                  style={{
+                    ...styles.select,
+                    marginTop: "12px",
+                    color: form.frequency === "" ? "#555" : "#030303",
+                  }}
+                  name="frequency"
+                  value={form.frequency}
+                  onChange={handleChange}
+                >
+                  <option value="" disabled>
+                    Coworking Frequency
+                  </option>
+                  <option value="daily">Daily</option>
+                  <option value="few_times_week">A few times a week</option>
+                  <option value="few_times_month">A few times a month</option>
+                  <option value="rarely">Rarely (travel only)</option>
+                  <option value="never">Never (but curious)</option>
+                </select>
 
-  <select
-    style={{
-      ...styles.select,
-      color: form.important_factor === "" ? "#555" : "#030303",
-    }}
-    name="important_factor"
-    value={form.important_factor}
-    onChange={handleChange}
-  >
-    <option value=""  disabled>
-    What Matters Most?
-    </option>
-    <option value="price">Price</option>
-    <option value="location">Location</option>
-    <option value="community">Community & Events</option>
-    <option value="amenities">Amenities (Pool, Cafe, etc.)</option>
-    <option value="wifi">Wi-Fi Reliability</option>
-    <option value="other">Other</option>
-  </select>
+                <select
+                  style={{
+                    ...styles.select,
+                    color: form.important_factor === "" ? "#555" : "#030303",
+                  }}
+                  name="important_factor"
+                  value={form.important_factor}
+                  onChange={handleChange}
+                >
+                  <option value="" disabled>
+                    What Matters Most?
+                  </option>
+                  <option value="price">Price</option>
+                  <option value="location">Location</option>
+                  <option value="community">Community & Events</option>
+                  <option value="amenities">
+                    Amenities (Pool, Cafe, etc.)
+                  </option>
+                  <option value="wifi">Wi-Fi Reliability</option>
+                  <option value="other">Other</option>
+                </select>
 
-  <textarea
-    style={styles.textarea}
-    name="comment"
-    placeholder="Any thoughts or suggestions?"
-    value={form.comment}
-    onChange={handleChange}
-  />
+                <textarea
+                  style={styles.textarea}
+                  name="comment"
+                  placeholder="Any thoughts or suggestions?"
+                  value={form.comment}
+                  onChange={handleChange}
+                />
 
-  <button type="submit" style={{ ...styles.formButton, marginTop: "8px" }}>
-    Notify Me
-  </button>
-  <p style={styles.smallText}>🔒 We respect your privacy.</p>
-</form>
-
-
+                <button
+                  type="submit"
+                  style={{ ...styles.formButton, marginTop: "8px" }}
+                >
+                  Notify Me
+                </button>
+                <p style={styles.smallText}>🔒 We respect your privacy.</p>
+              </form>
             </div>
 
             <div style={styles.formImageWrapper} className="hide-on-mobile">
