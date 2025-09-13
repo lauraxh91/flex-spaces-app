@@ -101,9 +101,9 @@ const HeaderText = ({ text = 'BookSpace' }) => {
 
       {!isMobile ? (
         <nav style={navStyle}>
-          <a href="#benefits" style={linkStyle}>Benefits</a>
           <a href="#how-it-works" style={linkStyle}>How It Works</a>
-          <a href="#contact" style={linkStyle}>Contact</a>
+          <a href="#carousel" style={linkStyle}>App Preview</a>
+          <a href="#contact" style={linkStyle}>Early Access</a>
         </nav>
       ) : (
         <>
