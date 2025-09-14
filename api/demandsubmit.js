@@ -24,9 +24,37 @@ export default async function handler(req, res) {
     const db = client.db(dbName);
     const collection = db.collection("demandsubmissions");
 
-    const { name, email, phone, comment } = req.body;
+    const {
+      email,
+      name,
+      phone,
+      frequency,
+      comment,
+      important_factor,
+      tracking_code,
+    } = req.body;
 
-    await collection.insertOne({ name, email, phone, comment });
+    // Validate tracking code format (16 character hex string)
+    const isValidTrackingCode =
+      tracking_code &&
+      typeof tracking_code === "string" &&
+      /^[A-F0-9]{16}$/.test(tracking_code);
+
+    await collection.insertOne({
+      email,
+      name,
+      phone,
+      frequency,
+      comment,
+      important_factor,
+      tracking_code: isValidTrackingCode ? tracking_code : "unknown",
+      timestamp: new Date(),
+      userAgent: req.headers["user-agent"] || "unknown",
+      ip:
+        req.headers["x-forwarded-for"] ||
+        req.connection.remoteAddress ||
+        "unknown",
+    });
 
     return res.status(200).json({ message: "Form submitted!" });
   } catch (err) {
